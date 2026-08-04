@@ -1,0 +1,16 @@
+{
+    "title": "Plone Recycle Bin",
+    "description": "A recycle bin for Plone",
+    "project_slug": "plone-recyclebin",
+    "author": "Plone Community",
+    "email": "info@plone.org",
+    "use_prerelease_versions": false,
+    "plone_version": "6.2.1",
+    "volto_version": "19.3.0",
+    "python_package_name": "plone.recyclebin",
+    "npm_package_name": "volto-recyclebin",
+    "github_organization": "plone",
+    "container_registry": "github",
+    "initialize_documentation": true,
+    "__template__": "monorepo_addon"
+}
