@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-03-22T12:43:34.158Z\n"
+"POT-Creation-Date: 2026-08-04T22:06:13.564Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -12,3 +12,303 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
+
+#. Default: "Advanced filters"
+#: components/RecycleBin/messages
+msgid "Advanced recycle bin filters"
+msgstr ""
+
+#. Default: "Any"
+#: components/RecycleBin/messages
+msgid "Any recycle bin filter value"
+msgstr ""
+
+#. Default: "Apply filters"
+#: components/RecycleBin/messages
+msgid "Apply recycle bin filters"
+msgstr ""
+
+#. Default: "Back to recycle bin"
+#: components/RecycleBin/messages
+msgid "Back to recycle bin"
+msgstr ""
+
+#. Default: "Target path for {title}"
+#: components/RecycleBin/messages
+msgid "Child restore target path"
+msgstr ""
+
+#. Default: "Clear all filters"
+#: components/RecycleBin/messages
+msgid "Clear recycle bin filters"
+msgstr ""
+
+#. Default: "Permanently delete the selected items? This cannot be undone."
+#: components/RecycleBin/messages
+msgid "Confirm delete selected items"
+msgstr ""
+
+#. Default: "Permanently delete every item in the recycle bin? This cannot be undone."
+#: components/RecycleBin/messages
+msgid "Confirm empty recycle bin"
+msgstr ""
+
+#. Default: "Permanently delete this item? This cannot be undone."
+#: components/RecycleBin/messages
+msgid "Confirm permanent deletion"
+msgstr ""
+
+#. Default: "Contained items ({count})"
+#: components/RecycleBin/messages
+msgid "Contained deleted items"
+msgstr ""
+
+#. Default: "Contains items"
+#: components/RecycleBin/messages
+msgid "Contains deleted items"
+msgstr ""
+
+#. Default: "Contains items"
+#: components/RecycleBin/messages
+msgid "Contains items"
+msgstr ""
+
+#. Default: "Delete selected"
+#: components/RecycleBin/messages
+msgid "Delete selected items permanently"
+msgstr ""
+
+#. Default: "Deleted by"
+#: components/RecycleBin/messages
+msgid "Deleted by"
+msgstr ""
+
+#. Default: "Deleted from"
+#: components/RecycleBin/messages
+msgid "Deleted date from"
+msgstr ""
+
+#. Default: "Deleted to"
+#: components/RecycleBin/messages
+msgid "Deleted date to"
+msgstr ""
+
+#. Default: "Deleted item details"
+#: components/RecycleBin/messages
+msgid "Deleted item details"
+msgstr ""
+
+#. Default: "Language"
+#: components/RecycleBin/messages
+msgid "Deleted item language"
+msgstr ""
+
+#. Default: "Item not found"
+#: components/RecycleBin/messages
+msgid "Deleted item not found"
+msgstr ""
+
+#. Default: "This item may already have been restored or permanently deleted."
+#: components/RecycleBin/messages
+msgid "Deleted item not found description"
+msgstr ""
+
+#. Default: "Title"
+#: components/RecycleBin/messages
+msgid "Deleted item title"
+msgstr ""
+
+#. Default: "Title, A–Z"
+#: components/RecycleBin/messages
+msgid "Deleted item title ascending"
+msgstr ""
+
+#. Default: "Title, Z–A"
+#: components/RecycleBin/messages
+msgid "Deleted item title descending"
+msgstr ""
+
+#. Default: "Type"
+#: components/RecycleBin/messages
+msgid "Deleted item type"
+msgstr ""
+
+#. Default: "Type, A–Z"
+#: components/RecycleBin/messages
+msgid "Deleted item type ascending"
+msgstr ""
+
+#. Default: "Type, Z–A"
+#: components/RecycleBin/messages
+msgid "Deleted item type descending"
+msgstr ""
+
+#. Default: "Deletion date"
+#: components/RecycleBin/messages
+msgid "Deletion date"
+msgstr ""
+
+#. Default: "Empty recycle bin"
+#: components/RecycleBin/messages
+msgid "Empty recycle bin"
+msgstr ""
+
+#. Default: "Loading recycle bin…"
+#: components/RecycleBin/messages
+msgid "Loading recycle bin"
+msgstr ""
+
+#. Default: "Nested items"
+#: components/RecycleBin/messages
+msgid "Nested item count"
+msgstr ""
+
+#. Default: "Deletion date, newest first"
+#: components/RecycleBin/messages
+msgid "Newest deletion first"
+msgstr ""
+
+#. Default: "Next"
+#: components/RecycleBin/messages
+msgid "Next recycle bin page"
+msgstr ""
+
+#. Default: "No items match the current filters."
+#: components/RecycleBin/messages
+msgid "No deleted items match"
+msgstr ""
+
+#. Default: "Deletion date, oldest first"
+#: components/RecycleBin/messages
+msgid "Oldest deletion first"
+msgstr ""
+
+#. Default: "Original path"
+#: components/RecycleBin/messages
+msgid "Original path"
+msgstr ""
+
+#. Default: "Permanently delete"
+#: components/RecycleBin/messages
+msgid "Permanently delete item"
+msgstr ""
+
+#. Default: "Previous"
+#: components/RecycleBin/messages
+msgid "Previous recycle bin page"
+msgstr ""
+
+#. Default: "Recycle bin"
+#: components/RecycleBin/messages
+msgid "Recycle bin"
+msgstr ""
+
+#. Default: "Items deleted from this site are stored here and can be restored or permanently deleted."
+#: components/RecycleBin/messages
+msgid "Recycle bin description"
+msgstr ""
+
+#. Default: "The recycle bin is empty."
+#: components/RecycleBin/messages
+msgid "Recycle bin is empty"
+msgstr ""
+
+#. Default: "Operation completed successfully."
+#: components/RecycleBin/messages
+msgid "Recycle bin operation succeeded"
+msgstr ""
+
+#. Default: "Items per page"
+#: components/RecycleBin/messages
+msgid "Recycle bin page size"
+msgstr ""
+
+#. Default: "{succeeded} succeeded and {failed} failed."
+#: components/RecycleBin/messages
+msgid "Recycle bin partial failure"
+msgstr ""
+
+#. Default: "Showing {start}–{end} of {total}"
+#: components/RecycleBin/messages
+msgid "Recycle bin result range"
+msgstr ""
+
+#. Default: "Recycle bin unavailable"
+#: components/RecycleBin/messages
+msgid "Recycle bin unavailable"
+msgstr ""
+
+#. Default: "The recycle bin is unavailable, or you do not have permission to access it."
+#: components/RecycleBin/messages
+msgid "Recycle bin unavailable description"
+msgstr ""
+
+#. Default: "Restore"
+#: components/RecycleBin/messages
+msgid "Restore deleted item"
+msgstr ""
+
+#. Default: "Restore to"
+#: components/RecycleBin/messages
+msgid "Restore item to"
+msgstr ""
+
+#. Default: "Restore selected"
+#: components/RecycleBin/messages
+msgid "Restore selected items"
+msgstr ""
+
+#. Default: "Target path"
+#: components/RecycleBin/messages
+msgid "Restore target path"
+msgstr ""
+
+#. Default: "Leave unchanged to restore to the original parent, or enter another portal-relative path."
+#: components/RecycleBin/messages
+msgid "Restore target path help"
+msgstr ""
+
+#. Default: "Search"
+#: components/RecycleBin/messages
+msgid "Search deleted items"
+msgstr ""
+
+#. Default: "Select all deleted items"
+#: components/RecycleBin/messages
+msgid "Select all deleted items"
+msgstr ""
+
+#. Default: "Select {title}"
+#: components/RecycleBin/messages
+msgid "Select deleted item"
+msgstr ""
+
+#. Default: "Sort by"
+#: components/RecycleBin/messages
+msgid "Sort deleted items"
+msgstr ""
+
+#. Default: "With contained items"
+#: components/RecycleBin/messages
+msgid "With contained items"
+msgstr ""
+
+#. Default: "Without contained items"
+#: components/RecycleBin/messages
+msgid "Without contained items"
+msgstr ""
+
+#. Default: "Workflow state"
+#: components/RecycleBin/messages
+msgid "Workflow state"
+msgstr ""
+
+#. Default: "Workflow state, A–Z"
+#: components/RecycleBin/messages
+msgid "Workflow state ascending"
+msgstr ""
+
+#. Default: "Workflow state, Z–A"
+#: components/RecycleBin/messages
+msgid "Workflow state descending"
+msgstr ""

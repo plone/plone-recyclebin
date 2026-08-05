@@ -4,7 +4,17 @@ A recycle bin for Plone
 
 ## Features
 
-TODO: List our awesome features
+- Keeps deleted Plone content in per-site persistent storage.
+- Restores complete content trees to their original or a selected destination.
+- Supports restoring individual descendants from a deleted folder.
+- Filters and sorts deleted content by title, path, type, deletion date, user,
+  language, workflow state, and whether it contains descendants.
+- Purges individual entries, empties the bin, and automatically expires entries
+  according to the configured retention period.
+- Provides Classic UI views plus the `@recyclebin` REST API used by Volto.
+
+Installing the add-on enables the recycle bin. Configure its retention and
+workflow behavior in the **Recycle bin settings** control panel.
 
 ## Installation
 

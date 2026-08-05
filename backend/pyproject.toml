@@ -28,14 +28,22 @@ classifiers = [
 ]
 dependencies = [
     "Products.CMFPlone",
+    "Products.CMFCore",
+    "Products.statusmessages",
     "plone.api",
+    "plone.base",
+    "plone.protect",
+    "plone.registry",
     "plone.restapi",
     "plone.volto",
+    "z3c.form",
+    "Zope",
 ]
 
 [project.optional-dependencies]
 test = [
     "horse-with-no-namespace",
+    "plone.app.contenttypes",
     "plone.app.testing",
     "plone.restapi[test]",
     "pytest",
@@ -163,7 +171,7 @@ order-by-type = false
 preview = true
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["E501", "RUF001", "S101"]
+"tests/*" = ["C901", "E501", "RUF001", "S101", "S110"]
 
 [tool.check-manifest]
 ignore = [
