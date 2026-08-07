@@ -10,7 +10,7 @@ class IBrowserLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
 
 
-class IRecycleBinControlPanelSettings(Interface):
+class IRecycleBinSettings(Interface):
     """Interface for recycle bin settings"""
 
     retention_period = schema.Int(

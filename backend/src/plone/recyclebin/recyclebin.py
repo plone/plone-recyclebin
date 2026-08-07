@@ -8,7 +8,7 @@ from datetime import timedelta
 from persistent import Persistent
 from plone.base import PloneMessageFactory as _
 from plone.recyclebin.interfaces import IRecycleBin
-from plone.recyclebin.interfaces import IRecycleBinControlPanelSettings
+from plone.recyclebin.interfaces import IRecycleBinSettings
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.interfaces import IContentish
 from Products.CMFCore.utils import getToolByName
@@ -157,7 +157,7 @@ class RecycleBin:
         """Get recycle bin settings from registry"""
         registry = getUtility(IRegistry)
         return registry.forInterface(
-            IRecycleBinControlPanelSettings, prefix="plone.recyclebin"
+            IRecycleBinSettings, prefix="plone.recyclebin"
         )
 
     def _process_folder_children(self, folder_obj, folder_path):

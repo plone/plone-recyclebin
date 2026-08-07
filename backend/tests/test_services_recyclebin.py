@@ -4,7 +4,7 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_PASSWORD
 from plone.recyclebin.interfaces import IRecycleBin
-from plone.recyclebin.interfaces import IRecycleBinControlPanelSettings
+from plone.recyclebin.interfaces import IRecycleBinSettings
 from plone.recyclebin.testing import FUNCTIONAL_TESTING
 from plone.registry.interfaces import IRegistry
 from plone.restapi.testing import RelativeSession
@@ -33,7 +33,7 @@ class RecycleBinTestBase(unittest.TestCase):
         # Configure recycle bin
         registry = getUtility(IRegistry)
         settings = registry.forInterface(
-            IRecycleBinControlPanelSettings, prefix="plone.recyclebin"
+            IRecycleBinSettings, prefix="plone.recyclebin"
         )
         settings.retention_period = 30
         settings.restore_to_initial_state = False

@@ -6,7 +6,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.recyclebin.browser.recyclebin import RecycleBinView
 from plone.recyclebin.interfaces import IRecycleBin
-from plone.recyclebin.interfaces import IRecycleBinControlPanelSettings
+from plone.recyclebin.interfaces import IRecycleBinSettings
 from plone.recyclebin.testing import INTEGRATION_TESTING
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
@@ -175,7 +175,7 @@ class RecycleBinTestCase(unittest.TestCase, RecycleBinAssertionMixin):
     def _configure_recyclebin_settings(self, **overrides):
         """Configure recycle bin settings with sensible test defaults"""
         settings = self.registry.forInterface(
-            IRecycleBinControlPanelSettings, prefix="plone.recyclebin"
+            IRecycleBinSettings, prefix="plone.recyclebin"
         )
 
         # Default test settings
@@ -245,7 +245,7 @@ class RecycleBinSetupTests(RecycleBinTestCase):
     def test_recyclebin_settings(self):
         """Test that the settings are correctly initialized"""
         settings = self.recyclebin._get_settings()
-        self.assertNotIn("recycling_enabled", IRecycleBinControlPanelSettings.names())
+        self.assertNotIn("recycling_enabled", IRecycleBinSettings.names())
         self.assertEqual(settings.retention_period, 30)
         self.assertFalse(settings.restore_to_initial_state)
 

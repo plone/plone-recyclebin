@@ -10,7 +10,7 @@
              category="plone-general"
              condition_expr=""
              icon_expr="string:trash"
-             title="Recycle bin settings"
+             title="Recycle bin"
              url_expr="string:${portal_url}/@@recyclebin-controlpanel"
              visible="True"
   >
