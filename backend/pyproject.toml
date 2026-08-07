@@ -34,8 +34,6 @@ dependencies = [
     "plone.base",
     "plone.protect",
     "plone.registry",
-    "plone.restapi",
-    "plone.volto",
     "z3c.form",
     "Zope",
 ]
@@ -46,6 +44,7 @@ test = [
     "plone.app.contenttypes",
     "plone.app.testing",
     "plone.restapi[test]",
+    "plone.volto",
     "pytest",
     "pytest-cov",
     "pytest-plone>=1.0.0a2",

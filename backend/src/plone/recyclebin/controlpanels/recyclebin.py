@@ -2,8 +2,6 @@ from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
 from plone.app.registry.browser.controlpanel import RegistryEditForm
 from plone.recyclebin import _
 from plone.recyclebin.interfaces import IRecycleBinSettings
-from plone.restapi.controlpanels import RegistryConfigletPanel
-from plone.restapi.interfaces import IControlpanelLayer
 from plone.z3cform import layout
 from zope.component import adapter
 from zope.interface import Interface
@@ -20,11 +18,18 @@ RecyclebinControlPanelView = layout.wrap_form(
 )
 
 
-@adapter(Interface, IControlpanelLayer)
-class RecyclebinSettingsControlPanel(RegistryConfigletPanel):
-    """Volto-compatible REST API control panel for recycle-bin settings."""
+try:
+    from plone.restapi.controlpanels import RegistryConfigletPanel
+    from plone.restapi.interfaces import IControlpanelLayer
+except ImportError:
+    pass
+else:
 
-    schema = IRecycleBinSettings
-    schema_prefix = "plone.recyclebin"
-    configlet_id = "recyclebin-controlpanel"
-    configlet_category_id = "plone-general"
+    @adapter(Interface, IControlpanelLayer)
+    class RecyclebinSettingsControlPanel(RegistryConfigletPanel):
+        """Volto-compatible REST API control panel for recycle-bin settings."""
+
+        schema = IRecycleBinSettings
+        schema_prefix = "plone.recyclebin"
+        configlet_id = "recyclebin-controlpanel"
+        configlet_category_id = "plone-general"

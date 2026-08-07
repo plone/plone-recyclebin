@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="plone.recyclebin"
     >
 
@@ -16,7 +17,10 @@
 
   <include package=".controlpanels" />
   <include package=".browser" />
-  <include package=".services.recyclebin" />
+  <include
+      package=".services.recyclebin"
+      zcml:condition="installed plone.restapi"
+      />
 
   <!-- Recycle Bin utility -->
   <utility
