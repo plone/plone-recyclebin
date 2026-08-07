@@ -6,12 +6,22 @@ const API_URL =
 
 const TEST_CONTENT = [
   'single-item',
-  'source-folder',
+  'source-container',
   'restored-children',
   'purge-item',
   'first-item',
   'second-item',
+  'whole-container',
+  'alternate-item',
+  'alternate-target',
+  'cancel-first-item',
+  'cancel-second-item',
+  'collision-item',
+  'filter-alpha',
+  'filter-beta',
 ];
+
+const TEST_USER = 'recycle-bin-member';
 
 const deleteTestContent = () => {
   TEST_CONTENT.forEach((path) => {
@@ -31,6 +41,15 @@ const emptyRecycleBin = () =>
     url: `${API_URL}/@recyclebin`,
     headers: { Accept: 'application/json' },
     auth: { user: 'admin', pass: 'secret' },
+  });
+
+const deleteTestUser = () =>
+  cy.request({
+    method: 'DELETE',
+    url: `${API_URL}/@users/${TEST_USER}`,
+    headers: { Accept: 'application/json' },
+    auth: { user: 'admin', pass: 'secret' },
+    failOnStatusCode: false,
   });
 
 const deleteThroughVolto = (path) => {
@@ -55,7 +74,12 @@ describe('Recycle bin', () => {
     cy.viewport('macbook-16');
     deleteTestContent();
     emptyRecycleBin();
+    deleteTestUser();
     cy.autologin();
+  });
+
+  afterEach(() => {
+    deleteTestUser();
   });
 
   it('deletes and restores a single item', () => {
@@ -81,17 +105,17 @@ describe('Recycle bin', () => {
     cy.contains('The recycle bin is empty.').should('be.visible');
   });
 
-  it('deletes a folder and restores one of its children', () => {
+  it('deletes a container document and restores one of its children', () => {
     cy.createContent({
       contentType: 'Document',
-      contentId: 'source-folder',
-      contentTitle: 'Source folder',
+      contentId: 'source-container',
+      contentTitle: 'Source container',
     });
     cy.createContent({
       contentType: 'Document',
       contentId: 'child-item',
       contentTitle: 'Child item',
-      path: 'source-folder',
+      path: 'source-container',
     });
     cy.createContent({
       contentType: 'Document',
@@ -99,11 +123,11 @@ describe('Recycle bin', () => {
       contentTitle: 'Restored children',
     });
 
-    deleteThroughVolto('source-folder');
+    deleteThroughVolto('source-container');
     visitRecycleBin();
 
-    cy.findByRole('link', { name: 'Source folder' }).click();
-    cy.findByRole('heading', { name: /Source folder/, level: 1 }).should(
+    cy.findByRole('link', { name: 'Source container' }).click();
+    cy.findByRole('heading', { name: /Source container/, level: 1 }).should(
       'be.visible',
     );
     cy.findByLabelText('Target path for Child item')
@@ -116,6 +140,64 @@ describe('Recycle bin', () => {
     cy.contains('Operation completed successfully.').should('be.visible');
     cy.visit('/restored-children/child-item');
     cy.findByRole('heading', { name: 'Child item', level: 1 }).should(
+      'be.visible',
+    );
+  });
+
+  it('restores a whole container document with its descendants', () => {
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'whole-container',
+      contentTitle: 'Whole container',
+    });
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'whole-child',
+      contentTitle: 'Whole child',
+      path: 'whole-container',
+    });
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'whole-grandchild',
+      contentTitle: 'Whole grandchild',
+      path: 'whole-container/whole-child',
+    });
+
+    deleteThroughVolto('whole-container');
+    visitRecycleBin();
+
+    cy.findByLabelText('Select Whole container').check({ force: true });
+    cy.findByRole('button', { name: 'Restore selected' }).click();
+
+    cy.location('pathname').should('eq', '/whole-container');
+    cy.visit('/whole-container/whole-child/whole-grandchild');
+    cy.findByRole('heading', { name: 'Whole grandchild', level: 1 }).should(
+      'be.visible',
+    );
+  });
+
+  it('restores an item to an alternate container document', () => {
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'alternate-item',
+      contentTitle: 'Alternate item',
+    });
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'alternate-target',
+      contentTitle: 'Alternate target',
+    });
+    cy.removeContent({ path: 'alternate-item' });
+    visitRecycleBin();
+
+    cy.findByRole('link', { name: 'Alternate item' }).click();
+    cy.get('.recycle-bin-restore-panel').within(() => {
+      cy.findByLabelText('Target path').type('alternate-target');
+      cy.findByRole('button', { name: 'Restore' }).click();
+    });
+
+    cy.location('pathname').should('eq', '/alternate-target/alternate-item');
+    cy.findByRole('heading', { name: 'Alternate item', level: 1 }).should(
       'be.visible',
     );
   });
@@ -169,5 +251,106 @@ describe('Recycle bin', () => {
     cy.contains('The recycle bin is empty.').should('be.visible');
     cy.findByRole('link', { name: 'First item' }).should('not.exist');
     cy.findByRole('link', { name: 'Second item' }).should('not.exist');
+  });
+
+  it('cancels permanent deletion actions without changing the recycle bin', () => {
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'cancel-first-item',
+      contentTitle: 'Cancel first item',
+    });
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'cancel-second-item',
+      contentTitle: 'Cancel second item',
+    });
+    cy.removeContent({ path: 'cancel-first-item' });
+    cy.removeContent({ path: 'cancel-second-item' });
+    visitRecycleBin();
+
+    cy.window().then((win) => {
+      cy.stub(win, 'confirm').returns(false).as('confirm');
+    });
+    cy.findByLabelText('Select Cancel first item').check({ force: true });
+    cy.findByRole('button', { name: 'Delete selected' }).click();
+    cy.findByRole('button', { name: 'Empty recycle bin' }).click();
+
+    cy.get('@confirm').should('have.been.calledTwice');
+    cy.findByRole('link', { name: 'Cancel first item' }).should('be.visible');
+    cy.findByRole('link', { name: 'Cancel second item' }).should('be.visible');
+  });
+
+  it('does not overwrite an existing item when restoration has a name conflict', () => {
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'collision-item',
+      contentTitle: 'Original collision item',
+    });
+    cy.removeContent({ path: 'collision-item' });
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'collision-item',
+      contentTitle: 'Replacement collision item',
+    });
+    visitRecycleBin();
+
+    cy.findByRole('link', { name: 'Original collision item' }).click();
+    cy.get('.recycle-bin-restore-panel').within(() => {
+      cy.findByRole('button', { name: 'Restore' }).click();
+    });
+
+    cy.get('.ui.negative.message').should('be.visible');
+    cy.visit('/collision-item');
+    cy.findByRole('heading', {
+      name: 'Replacement collision item',
+      level: 1,
+    }).should('be.visible');
+    visitRecycleBin();
+    cy.findByRole('link', { name: 'Original collision item' }).should(
+      'be.visible',
+    );
+  });
+
+  it('filters recycled items by title', () => {
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'filter-alpha',
+      contentTitle: 'Filter alpha',
+    });
+    cy.createContent({
+      contentType: 'Document',
+      contentId: 'filter-beta',
+      contentTitle: 'Filter beta',
+    });
+    cy.removeContent({ path: 'filter-alpha' });
+    cy.removeContent({ path: 'filter-beta' });
+    visitRecycleBin();
+
+    cy.get('.recycle-bin-filters').within(() => {
+      cy.findByLabelText('Search').type('Filter alpha');
+      cy.findByRole('button', { name: 'Apply filters' }).click();
+    });
+
+    cy.location('search').should('include', 'title=Filter+alpha');
+    cy.findByRole('link', { name: 'Filter alpha' }).should('be.visible');
+    cy.findByRole('link', { name: 'Filter beta' }).should('not.exist');
+  });
+
+  it('denies recycle-bin access to a member without permission', () => {
+    cy.createUser({
+      username: TEST_USER,
+      fullname: 'Recycle bin member',
+      password: 'password',
+      roles: ['Member'],
+    });
+    cy.autologin(TEST_USER, 'password');
+    cy.intercept('GET', '**/++api++/@recyclebin*').as('getDeniedRecycleBin');
+
+    cy.visit('/@@recyclebin');
+
+    cy.wait('@getDeniedRecycleBin')
+      .its('response.statusCode')
+      .should('be.oneOf', [401, 403]);
+    cy.findByText('Recycle bin unavailable').should('be.visible');
   });
 });
