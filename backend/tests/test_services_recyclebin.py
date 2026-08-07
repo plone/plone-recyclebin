@@ -612,7 +612,7 @@ class TestRecycleBinControlPanel(RecycleBinTestBase):
 
 
 class TestRecycleBinPermissions(unittest.TestCase):
-    """Tests that @recyclebin endpoints require cmf.ManagePortal permission.
+    """Tests that @recyclebin endpoints require Manager role.
 
     Anonymous users should get 401; authenticated users without ManagePortal
     should get 403.
