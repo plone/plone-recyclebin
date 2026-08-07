@@ -2,7 +2,7 @@ import type { ConfigType } from '@plone/registry';
 import RecycleBinItemView from '../components/RecycleBin/RecycleBinItemView';
 import RecycleBinView from '../components/RecycleBin/RecycleBinView';
 import RecycleBinUserMenuLink from '../components/Toolbar/RecycleBinUserMenuLink';
-import { recycleBin } from '../reducers';
+import recycleBin from '../reducers/recyclebin';
 
 export default function install(config: ConfigType) {
   config.addonReducers = {

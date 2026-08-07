@@ -10,7 +10,7 @@ import {
   getRecycleBin,
   purgeRecycleBinItem,
   restoreRecycleBinItem,
-} from '../../actions';
+} from '../../actions/recyclebin';
 import type { RecycleBinState } from '../../reducers/recyclebin';
 import RecycleBinListing, {
   type RecycleBinOperationMessage,

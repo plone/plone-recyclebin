@@ -9,7 +9,7 @@ import {
   getRecycleBinItem,
   purgeRecycleBinItem,
   restoreRecycleBinItem,
-} from '../../actions';
+} from '../../actions/recyclebin';
 import type { RecycleBinState } from '../../reducers/recyclebin';
 import RecycleBinItemDetails from './RecycleBinItemDetails';
 import type { RecycleBinOperationMessage } from './RecycleBinListing';
