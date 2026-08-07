@@ -13,8 +13,10 @@ A recycle bin for Plone
   according to the configured retention period.
 - Provides Classic UI views plus the `@recyclebin` REST API used by Volto.
 
-Installing the add-on enables the recycle bin. Configure its retention and
-workflow behavior in the **Recycle bin settings** control panel.
+Deleted content is recycled by default after installing the add-on. The
+**Recycle bin** control panel can disable capture of new deletions and
+configure retention and workflow behavior; existing recycled items remain
+available when capture is disabled.
 
 ## Installation
 

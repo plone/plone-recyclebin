@@ -1,6 +1,7 @@
 import type { ConfigType } from '@plone/registry';
 import RecycleBinItemView from '../components/RecycleBin/RecycleBinItemView';
 import RecycleBinView from '../components/RecycleBin/RecycleBinView';
+import RecycleBinUserMenuLink from '../components/Toolbar/RecycleBinUserMenuLink';
 import { recycleBin } from '../reducers';
 
 export default function install(config: ConfigType) {
@@ -20,11 +21,6 @@ export default function install(config: ConfigType) {
       component: RecycleBinView,
       exact: true,
     },
-    {
-      path: '/controlpanel/recycle-bin',
-      component: RecycleBinView,
-      exact: true,
-    },
     ...config.addonRoutes,
   ];
 
@@ -33,13 +29,13 @@ export default function install(config: ConfigType) {
     /\/@@recyclebin(?:\/.*)?$/,
   ];
 
-  config.settings.controlpanels = [
-    ...config.settings.controlpanels,
+  config.settings.appExtras = [
     {
-      '@id': '/recycle-bin',
-      group: 'Add-on Configuration',
-      title: 'Recycle bin',
+      match: '',
+      component: RecycleBinUserMenuLink,
+      props: {},
     },
+    ...config.settings.appExtras,
   ];
 
   return config;

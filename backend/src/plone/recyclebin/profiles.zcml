@@ -6,8 +6,8 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="plone.recyclebin: Install"
-      description="Package to configure a new plone.recyclebin site"
+      title="plone.recyclebin"
+      description="Recycle bin for Plone"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       directory="profiles/default"
       />

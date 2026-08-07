@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-05-25 17:12+0000\n"
+"POT-Creation-Date: 2026-08-07 18:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,3 +16,227 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone.recyclebin\n"
+
+#: plone/recyclebin/browser/recyclebin.py:295
+msgid "${count} item(s) permanently deleted."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:232
+msgid "${count} item(s) restored successfully."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:261
+msgid "${count} items could not be restored because their original locations no longer exist. Please visit each item's detail page to specify a new location."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:970
+msgid "Child item '${title}' successfully restored."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:922
+msgid "Could not determine the original location for this child item. Please enter a target path."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:272
+msgid "Delete selected"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:303
+msgid "Empty Recycle Bin"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:43
+msgid "Enter the path to the container where the item should be restored (e.g., /folder1/subfolder)"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:882
+msgid "Failed to delete item '${title}'."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:951
+msgid "Failed to restore child item."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:850
+msgid "Failed to restore item. It may have been already restored or deleted."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:873
+msgid "Item '${title}' permanently deleted."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:833
+msgid "Item '${title}' successfully restored."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:891
+msgid "Item not found. It may have been already deleted."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:804
+msgid "Item not found. It may have been already restored or deleted."
+msgstr ""
+
+#: plone/recyclebin/recyclebin.py:468
+msgid "Item was deleted and moved to recycle bin"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:905
+msgid "Missing child identifier. Please refresh and try again."
+msgstr ""
+
+#: plone/recyclebin/recyclebin.py:462
+msgid "Moved to recycle bin"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:404
+msgid "Newest first (default)"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:284
+msgid "No items selected for deletion."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:200
+msgid "No items selected for restoration."
+msgstr ""
+
+#: plone/recyclebin/interfaces.py:28
+msgid "Number of days to keep deleted items in the recycle bin. Set to '0' to disable automatic purging."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:405
+msgid "Oldest first"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:410
+msgid "Path (A-Z)"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:411
+msgid "Path (Z-A)"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:861
+msgid "Permanently delete"
+msgstr ""
+
+#: plone/recyclebin/controlpanels/recyclebin.py:15
+msgid "Recycle bin"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:315
+msgid "Recycle bin emptied. ${count} item(s) permanently deleted."
+msgstr ""
+
+#: plone/recyclebin/profiles.zcml:13
+msgid "Recycle bin for Plone"
+msgstr ""
+
+#: plone/recyclebin/interfaces.py:17
+msgid "Recycle deleted items"
+msgstr ""
+
+#: plone/recyclebin/recyclebin.py:521
+msgid "Reset to initial state"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:188
+msgid "Restore Selected"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:773
+msgid "Restore item"
+msgstr ""
+
+#: plone/recyclebin/interfaces.py:37
+msgid "Restore to initial workflow state"
+msgstr ""
+
+#: plone/recyclebin/recyclebin.py:464
+msgid "Restored from recycle bin"
+msgstr ""
+
+#: plone/recyclebin/recyclebin.py:470
+msgid "Restored from recycle bin after deletion"
+msgstr ""
+
+#: plone/recyclebin/interfaces.py:27
+msgid "Retention period"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:31
+msgid "Selected Items"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:32
+msgid "Selected items for operations"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:42
+msgid "Target container"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:936
+msgid "Target location not found: ${path}"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:789
+msgid "The folder '${path}' where you are trying to restore this item cannot be found. It may have been moved or deleted. Please choose a different location."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:246
+msgid "The item '${title}' could not be restored because its original location no longer exists. Please choose a different location."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:406
+msgid "Title (A-Z)"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:407
+msgid "Title (Z-A)"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:408
+msgid "Type (A-Z)"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:409
+msgid "Type (Z-A)"
+msgstr ""
+
+#: plone/recyclebin/profiles.zcml:21
+msgid "Uninstall plone.recyclebin setup."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:111
+msgid "Unknown"
+msgstr ""
+
+#: plone/recyclebin/interfaces.py:18
+msgid "When enabled, deleted content is added to the recycle bin. Disabling this setting does not hide or clear existing recycled items."
+msgstr ""
+
+#: plone/recyclebin/interfaces.py:38
+msgid "When enabled, restored content will be set to its initial workflow state (usually 'draft') instead of the workflow state it was in when deleted."
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:412
+msgid "Workflow state (A-Z)"
+msgstr ""
+
+#: plone/recyclebin/browser/recyclebin.py:413
+msgid "Workflow state (Z-A)"
+msgstr ""
+
+#: plone/recyclebin/recyclebin.py:523
+msgid "Workflow state reset to '${initial_state}' during restoration from recycle bin"
+msgstr ""
+
+#: plone/recyclebin/profiles.zcml:13
+msgid "plone.recyclebin"
+msgstr ""
+
+#: plone/recyclebin/profiles.zcml:21
+msgid "plone.recyclebin: Uninstall"
+msgstr ""

@@ -13,6 +13,16 @@ class IBrowserLayer(IDefaultBrowserLayer):
 class IRecycleBinSettings(Interface):
     """Interface for recycle bin settings"""
 
+    recycling_enabled = schema.Bool(
+        title=_("Recycle deleted items"),
+        description=_(
+            "When enabled, deleted content is added to the recycle bin. "
+            "Disabling this setting does not hide or clear existing recycled items."
+        ),
+        default=True,
+        required=False,
+    )
+
     retention_period = schema.Int(
         title=_("Retention period"),
         description=_(

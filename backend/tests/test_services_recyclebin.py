@@ -32,9 +32,8 @@ class RecycleBinTestBase(unittest.TestCase):
 
         # Configure recycle bin
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(
-            IRecycleBinSettings, prefix="plone.recyclebin"
-        )
+        settings = registry.forInterface(IRecycleBinSettings, prefix="plone.recyclebin")
+        settings.recycling_enabled = True
         settings.retention_period = 30
         settings.restore_to_initial_state = False
 
@@ -117,6 +116,22 @@ class TestRecycleBinGET(RecycleBinTestBase):
         data = response.json()
         self.assertEqual(0, data["items_total"])
         self.assertEqual([], data["items"])
+
+    def test_get_remains_available_when_recycling_is_disabled(self):
+        """The setting controls capture, not access to existing items."""
+        recycle_id, _title = self._add_document_to_recyclebin()
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IRecycleBinSettings, prefix="plone.recyclebin")
+        settings.recycling_enabled = False
+        transaction.commit()
+
+        response = self.api_session.get("/@recyclebin")
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(
+            [recycle_id],
+            [item["recycle_id"] for item in response.json()["items"]],
+        )
 
     def test_get_listing_returns_expected_keys(self):
         """GET /@recyclebin listing contains required top-level keys."""
@@ -560,6 +575,40 @@ class TestRecycleBinRestore(RecycleBinTestBase):
         restored_id = response.json()["restored_item"]["id"]
         transaction.abort()  # sync with what the WSGI request committed
         self.assertIn(restored_id, self.portal["target-folder"])
+
+
+class TestRecycleBinControlPanel(RecycleBinTestBase):
+    """Tests for the Volto-compatible recycle-bin settings panel."""
+
+    def test_controlpanel_is_listed_as_settings(self):
+        response = self.api_session.get("/@controlpanels")
+
+        self.assertEqual(200, response.status_code)
+        panel = next(
+            item
+            for item in response.json()
+            if item["@id"].endswith("/recyclebin-settings")
+        )
+        self.assertEqual("Recycle bin", panel["title"])
+
+    def test_controlpanel_exposes_enabled_capture_setting(self):
+        response = self.api_session.get("/@controlpanels/recyclebin-settings")
+
+        self.assertEqual(200, response.status_code)
+        data = response.json()
+        self.assertTrue(data["data"]["recycling_enabled"])
+        self.assertIn("recycling_enabled", data["schema"]["properties"])
+
+    def test_controlpanel_can_disable_capture_without_disabling_bin(self):
+        response = self.api_session.patch(
+            "/@controlpanels/recyclebin-settings",
+            json={"recycling_enabled": False},
+        )
+        self.assertEqual(204, response.status_code)
+
+        response = self.api_session.get("/@controlpanels/recyclebin-settings")
+        self.assertFalse(response.json()["data"]["recycling_enabled"])
+        self.assertEqual(200, self.api_session.get("/@recyclebin").status_code)
 
 
 class TestRecycleBinPermissions(unittest.TestCase):

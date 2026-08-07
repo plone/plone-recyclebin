@@ -9,9 +9,9 @@ A recycle bin for Plone
 The backend captures deleted content trees and exposes Classic UI views and a
 `@recyclebin` REST API. The Volto add-on provides a Redux-powered management UI
 at `/@@recyclebin`, including filtering, batching, bulk restore/purge, alternate
-restore destinations, and restoration of individual descendants. Installing
-the add-on enables recycling; retention and workflow behavior are configured in
-**Site Setup → Recycle bin settings**.
+restore destinations, and restoration of individual descendants. Recycling of
+new deletions is enabled by default; capture, retention, and workflow behavior
+are configured in **Site Setup → Recycle bin**.
 
 ## Quick Start 🏁
 

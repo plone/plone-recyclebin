@@ -205,6 +205,7 @@ msgstr ""
 
 #. Default: "Recycle bin"
 #: components/RecycleBin/messages
+#: components/Toolbar/RecycleBinUserMenuLink
 msgid "Recycle bin"
 msgstr ""
 

@@ -9,8 +9,8 @@ from zope.lifecycleevent.interfaces import IObjectRemovedEvent
 def handle_content_removal(obj, event):
     """Event handler for content removal
 
-    This intercepts standard content removal and puts the item in the recycle bin
-    instead of letting it be deleted if the recycle bin is enabled.
+    This captures standard content removal in the recycle bin when recycling is
+    enabled in the add-on settings.
     """
     # Ignore if the object is being moved
     if getattr(obj, "_v_is_being_moved", False):

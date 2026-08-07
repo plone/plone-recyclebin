@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-08-04T22:06:13.564Z\n"
+"POT-Creation-Date: 2026-08-07T18:18:06.656Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -200,6 +200,7 @@ msgstr ""
 
 #. Default: "Recycle bin"
 #: components/RecycleBin/messages
+#: components/Toolbar/RecycleBinUserMenuLink
 msgid "Recycle bin"
 msgstr ""
 

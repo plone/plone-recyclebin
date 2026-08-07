@@ -156,9 +156,7 @@ class RecycleBin:
     def _get_settings(self):
         """Get recycle bin settings from registry"""
         registry = getUtility(IRegistry)
-        return registry.forInterface(
-            IRecycleBinSettings, prefix="plone.recyclebin"
-        )
+        return registry.forInterface(IRecycleBinSettings, prefix="plone.recyclebin")
 
     def _process_folder_children(self, folder_obj, folder_path):
         """Helper method to process folder children recursively
@@ -225,11 +223,14 @@ class RecycleBin:
             process_children: Whether to recursively process folder children
 
         Returns:
-            The recycle ID of the stored item
+            The recycle ID of the stored item, or None when recycling is disabled
 
         Raises:
             TypeError: If obj does not provide IContentish interface
         """
+        if self._get_settings().recycling_enabled is False:
+            return None
+
         # Check if obj provides IContentish interface (i.e., is a content item)
         if not IContentish.providedBy(obj):
             raise TypeError(

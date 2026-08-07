@@ -12,4 +12,9 @@
       permission="plone.recyclebin.AccessRecycleBin"
       />
 
+  <adapter
+      factory=".recyclebin.RecyclebinSettingsControlPanel"
+      name="recyclebin-settings"
+      />
+
 </configure>

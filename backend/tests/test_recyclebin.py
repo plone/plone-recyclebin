@@ -180,6 +180,7 @@ class RecycleBinTestCase(unittest.TestCase, RecycleBinAssertionMixin):
 
         # Default test settings
         default_settings = {
+            "recycling_enabled": True,
             "retention_period": 30,
             "restore_to_initial_state": False,
         }
@@ -245,7 +246,9 @@ class RecycleBinSetupTests(RecycleBinTestCase):
     def test_recyclebin_settings(self):
         """Test that the settings are correctly initialized"""
         settings = self.recyclebin._get_settings()
-        self.assertNotIn("recycling_enabled", IRecycleBinSettings.names())
+        self.assertIn("recycling_enabled", IRecycleBinSettings.names())
+        self.assertTrue(IRecycleBinSettings["recycling_enabled"].default)
+        self.assertTrue(settings.recycling_enabled)
         self.assertEqual(settings.retention_period, 30)
         self.assertFalse(settings.restore_to_initial_state)
 
@@ -270,6 +273,19 @@ class RecycleBinContentTests(RecycleBinTestCase):
 
         # Verify additional news-specific behavior
         self.assertEqual(restored_news.portal_type, "News Item")
+
+    def test_disabling_recycling_only_stops_new_deletions(self):
+        """Disabling capture leaves existing recycled items available."""
+        self.portal.manage_delObjects([self.page.getId()])
+        recycled_items = self.recyclebin.get_items()
+        self.assertEqual(1, len(recycled_items))
+        recycle_id = recycled_items[0]["recycle_id"]
+
+        self._configure_recyclebin_settings(recycling_enabled=False)
+        self.portal.manage_delObjects([self.news.getId()])
+
+        self.assertEqual(1, len(self.recyclebin.get_items()))
+        self.assertEqual(recycle_id, self.recyclebin.get_item(recycle_id)["recycle_id"])
 
     def test_content_types_metadata_storage(self):
         """Test that different content types store metadata correctly"""
