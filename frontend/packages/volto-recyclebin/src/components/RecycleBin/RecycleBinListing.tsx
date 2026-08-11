@@ -55,7 +55,7 @@ export default function RecycleBinListing({
       <Header as="h1" className="documentFirstHeading">
         {intl.formatMessage(messages.title)}
       </Header>
-      <p className="recycle-bin-description">
+      <p className="documentDescription">
         {intl.formatMessage(messages.description)}
       </p>
 

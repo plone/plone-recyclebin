@@ -19,7 +19,7 @@ export default function RecycleBinActions({
   const noneSelected = selectedItems.length === 0;
 
   return (
-    <Button.Group className="recycle-bin-actions">
+    <div className="recycle-bin-actions">
       <Button
         primary
         disabled={noneSelected || busy}
@@ -55,6 +55,6 @@ export default function RecycleBinActions({
       >
         {intl.formatMessage(messages.empty)}
       </Button>
-    </Button.Group>
+    </div>
   );
 }

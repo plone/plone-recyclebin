@@ -1,50 +1,21 @@
 .recycle-bin-page {
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-
-  .documentFirstHeading {
-    margin-bottom: 0.5rem;
-  }
-
-  .recycle-bin-description {
-    max-width: 52rem;
-    color: #555;
-    font-size: 1.1rem;
-  }
-
   .recycle-bin-loading {
     min-height: 12rem;
   }
 
   .recycle-bin-filters {
-    padding: 1.25rem;
-    border: 1px solid #d4d4d5;
-    margin: 2rem 0 1rem;
-    background: #f8f8f8;
-
-    details {
-      margin-bottom: 1rem;
-    }
-
     summary {
       margin-bottom: 1rem;
       cursor: pointer;
       font-weight: 700;
     }
-
-    select,
     input {
-      width: 100%;
-      min-height: 2.75rem;
-      padding: 0.65rem;
-      border: 1px solid rgba(34, 36, 38, 0.15);
-      border-radius: 0.28571429rem;
-      background: #fff;
+      padding: 0.5em 0 !important;
     }
   }
 
-  .recycle-bin-advanced-fields {
-    margin-top: 0.5rem;
+  .fields {
+    box-sizing: border-box;
   }
 
   .recycle-bin-active-filters {
@@ -99,12 +70,6 @@
   .recycle-bin-pagination {
     display: flex;
     gap: 0.5rem;
-  }
-
-  .recycle-bin-item-details {
-    .documentFirstHeading {
-      margin-top: 1rem;
-    }
   }
 
   .recycle-bin-restore-panel {

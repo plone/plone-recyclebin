@@ -31,8 +31,9 @@ export default function RecycleBinItemDetails({
         ← {intl.formatMessage(messages.back)}
       </Link>
       <Header as="h1" className="documentFirstHeading">
-        {item.title || item.id} <Label size="large">{item['@type']}</Label>
+        {item.title || item.id}
       </Header>
+      <Label>{item['@type']}</Label>
 
       {operationMessage ? (
         <Message
