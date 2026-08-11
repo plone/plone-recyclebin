@@ -1,0 +1,99 @@
+name: Acceptance CI
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
+      working-directory:
+        required: false
+        type: string
+        default: frontend
+      backend-working-directory:
+        required: false
+        type: string
+        default: backend
+      python-version:
+        required: true
+        type: string
+      plone-version:
+        required: true
+        type: string
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: plone/meta/.github/actions/setup_backend_uv@2.x
+        with:
+          python-version: ${{ inputs.python-version }}
+          plone-version: ${{ inputs.plone-version }}
+          working-directory: ${{ inputs.backend-working-directory }}
+
+      - name: Use Node.js ${{ inputs.node-version }}
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Enable corepack
+        run: npm i -g corepack@latest && corepack enable
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles(format('{0}/pnpm-lock.yaml', inputs.working-directory)) }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - uses: actions/cache@v4
+        name: Setup Cypress cache
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles(format('{0}/pnpm-lock.yaml', inputs.working-directory)) }}
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Install Cypress binary
+        run: pnpm --filter @plone/volto exec cypress install
+
+      - uses: JarvusInnovations/background-action@v1
+        name: Start servers
+        with:
+          run: |
+            make -C backend acceptance-backend-start &
+            make -C frontend acceptance-frontend-prod-start &
+          wait-on: |
+            http-get://localhost:55001/plone
+            http://localhost:3000
+          tail: true
+          wait-for: 10m
+          log-output: stderr,stdout
+          log-output-resume: stderr
+          working-directory: ${{ github.workspace }}
+
+      - name: Run acceptance tests
+        run: make ci-acceptance-test
+
+      - name: Upload Cypress artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: |
+            ${{ inputs.working-directory }}/cypress/screenshots
+            ${{ inputs.working-directory }}/cypress/videos
+          if-no-files-found: ignore

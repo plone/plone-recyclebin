@@ -1,13 +1,13 @@
-# Plone Recycle Bin
+# Plone Recycle Bin ♻️
 
-Documentation for Plone Recycle Bin.
-A recycle bin for Plone
+Documentation for Plone Recycle Bin, published at
+<https://plone.github.io/plone-recyclebin/>.
 
 This project provides a Sphinx-based documentation environment for your Plone project, powered by the [Plone Sphinx Theme](https://github.com/plone/plone-sphinx-theme).
 It's generated using the `documentation_starter` template from [Cookieplone](https://github.com/plone/cookieplone).
 
 
-## Prerequisites
+## Prerequisites ✅
 
 -   [uv](https://docs.astral.sh/uv/) is the recommended tool for managing Python versions and project dependencies.
 
@@ -18,7 +18,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 
-## Build documentation
+## Build documentation 🛠️
 
 To build the HTML documentation, issue the following command.
 
@@ -59,7 +59,7 @@ make help
 ```
 
 
-## Customize the Plone Recycle Bin documentation
+## Customize the Plone Recycle Bin documentation ✍️
 
 This section provides how-to guidance to customize your documentation.
 
@@ -69,21 +69,16 @@ It has extensive comments for each part, often with links to the authoritative d
 The following sections describe customization not addressed in `docs/conf.py`.
 
 
-### Manage dependencies
+### Manage dependencies 📦
 
 You can configure which dependencies or requirements you want to use in your documentation using uv.
 Requirements are stored in the `dev` dependency group in the `pyproject.toml` file.
 
-To add a requirement, use the following command.
+Add or remove requirements in `pyproject.toml`, then synchronize the
+documentation environment with the supported Make target.
 
 ```shell
-uv add --dev my-requirement
-```
-
-To remove a requirement, use the following command.
-
-```shell
-uv remove --dev my-requirement
+make install
 ```
 
 See also uv's documentation [Development dependencies](https://docs.astral.sh/uv/concepts/projects/dependencies/#development-dependencies).
@@ -91,33 +86,16 @@ See also uv's documentation [Development dependencies](https://docs.astral.sh/uv
 After installing a dependency, you might need to add it to your documentation's configuration file, `conf.py`, under the `extensions` key.
 
 
-### Replace static files
+## Publish to GitHub Pages 🚀
 
-You might want to replace the default static files, located in `docs/_static`, `logo.svg` and `favicon.ico`.
-Plone Sphinx Theme is configured to use these files when rendering documentation to HTML.
+The `pages.yml` workflow builds the Sphinx site and deploys it after a push to
+`main` that changes the documentation or publishing workflow. It can also be
+started manually from the **Actions** tab.
 
-If you rename `logo.svg`, you must update `conf.py`, under the `html_logo`, `ogp_image`, and `latex_logo` keys.
-
-
-## Read the Docs
-
-Now that you've built your documentation, how do you publish it?
-And how do you get collaborators to easily review your changes to your documentation?
-
-Thankfully, [Read the Docs](https://about.readthedocs.com/) provides both hosting of documentation and pull request previews.
-For public repositories, this service is free.
-However, the Plone Foundation donates to Read the Docs for their unwavering support to open source software, and encourages you to do the same.
-
-Your documentation scaffold is partially configured to use Read the Docs.
-In several files, search for the string `MY_READTHEDOCS_PROJECT_SLUG`.
-You'll need to replace that string with the slug that Read the Docs creates for you when you import your project.
-
-For complete documentation of this process, see the Plone 6 Documentation [Pull request preview builds](https://6.docs.plone.org/contributing/documentation/admins.html#pull-request-preview-builds).
-
-See also Read the Docs documentation:
-
--   [Pull request previews](https://docs.readthedocs.com/platform/stable/pull-requests.html)
--   [Build process overview](https://docs.readthedocs.com/platform/stable/builds.html)
+A repository administrator must select **GitHub Actions** as the publishing
+source under **Settings → Pages → Build and deployment** once. The workflow
+uses the protected `github-pages` environment and the minimum `pages: write`
+and `id-token: write` permissions required by GitHub Pages.
 
 ## Credits and acknowledgements 🙏
 

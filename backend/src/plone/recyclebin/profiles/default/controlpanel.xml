@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        meta_type="Plone Control Panel Tool"
         name="portal_controlpanel"
+        i18n:domain="plone.recyclebin"
 >
 
-  <!-- -*- extra stuff goes here -*- -->
-
+  <configlet action_id="recyclebin-controlpanel"
+             appId="recyclebin-controlpanel"
+             category="plone-general"
+             condition_expr=""
+             icon_expr="string:trash"
+             title="Recycle bin"
+             url_expr="string:${portal_url}/@@recyclebin-controlpanel"
+             visible="True"
+  >
+    <permission>plone.recyclebin: Access recycle bin</permission>
+  </configlet>
 </object>

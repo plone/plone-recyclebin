@@ -86,16 +86,6 @@ changes: .venv/bin/python
 	@echo
 	@echo "The overview file is in $(BUILDDIR)/changes."
 
-.PHONY: rtd-prepare
-rtd-prepare:  ## Prepare environment on Read the Docs
-	asdf plugin add uv
-	asdf install uv latest
-	asdf global uv latest
-
-.PHONY: rtd-pr-preview  ## Build pull request previews on Read the Docs
-rtd-pr-preview: rtd-prepare .venv/bin/python ## Build pull request preview on Read the Docs
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) ${READTHEDOCS_OUTPUT}/html/
-
 .PHONY: build
 build: html  ## Build documentation in HTML format
 

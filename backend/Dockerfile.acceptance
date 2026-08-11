@@ -30,7 +30,7 @@ LABEL maintainer="Plone Community <info@plone.org>" \
       org.label-schema.vendor="Plone Community"
 
 ENV CONFIGURE_PACKAGES="plone.restapi,plone.volto,plone.volto.cors,plone.recyclebin"
-ENV APPLY_PROFILES="plone.recyclebin:default"
+ENV APPLY_PROFILES="plone.app.contenttypes:plone-content,plone.restapi:default,plone.volto:default,plone.recyclebin:default"
 
 # Copy /app from builder
 COPY --from=builder /app /app

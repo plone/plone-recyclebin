@@ -3,6 +3,10 @@
           i18n:domain="plone.recyclebin"
 >
 
+  <records interface="plone.recyclebin.interfaces.IRecycleBinSettings"
+           prefix="plone.recyclebin"
+  />
+
   <!-- -*- extra stuff goes here -*- -->
 
 </registry>

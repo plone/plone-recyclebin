@@ -24,7 +24,6 @@ on:
         default: backend
 
 jobs:
-
   lint:
     name: "Backend: Lint"
     uses: plone/meta/.github/workflows/backend-lint.yml@2.x
@@ -39,8 +38,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.11', '3.12', '3.13']
-        plone-version: ['6.2-latest', '6.1-latest', '6.0-latest']
+        python-version: ["3.11", "3.12", "3.13"]
+        plone-version: ["6.2-latest", "6.1-latest", "6.0-latest"]
     with:
       python-version: ${{ matrix.python-version }}
       plone-version: ${{ matrix.plone-version }}
@@ -54,27 +53,27 @@ jobs:
       plone-version: ${{ inputs.plone-version }}
       working-directory: ${{ inputs.working-directory }}
 
-  release:
-    name: "Backend: Build and publish Container Image"
-    uses: plone/meta/.github/workflows/container-image-build-push.yml@2.x
-    needs:
-      - lint
-      - test
-      - coverage
-    permissions:
-      contents: read
-      packages: write
-    with:
-      base-tag: ${{ inputs.base-tag }}
-      image-name-prefix: ${{ inputs.image-name-prefix }}
-      image-name-suffix: ${{ inputs.image-name-suffix }}
-      working-directory: ${{ inputs.working-directory }}
-      build-args: |
-        PLONE_VERSION=${{ inputs.plone-version }}
-      push: ${{ github.event_name != 'pull_request' }}
-    secrets:
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  # release:
+  #   name: "Backend: Build and publish Container Image"
+  #   uses: plone/meta/.github/workflows/container-image-build-push.yml@2.x
+  #   needs:
+  #     - lint
+  #     - test
+  #     - coverage
+  #   permissions:
+  #     contents: read
+  #     packages: write
+  #   with:
+  #     base-tag: ${{ inputs.base-tag }}
+  #     image-name-prefix: ${{ inputs.image-name-prefix }}
+  #     image-name-suffix: ${{ inputs.image-name-suffix }}
+  #     working-directory: ${{ inputs.working-directory }}
+  #     build-args: |
+  #       PLONE_VERSION=${{ inputs.plone-version }}
+  #     push: ${{ github.event_name != 'pull_request' }}
+  #   secrets:
+  #     username: ${{ github.actor }}
+  #     password: ${{ secrets.GITHUB_TOKEN }}
 
   report:
     name: "Final report"
@@ -84,7 +83,7 @@ jobs:
       - lint
       - test
       - coverage
-      - release
+      # - release
     steps:
       - name: Write report
         run: |
@@ -94,4 +93,4 @@ jobs:
           echo '| lint | ${{ needs.lint.result }} |' >> $GITHUB_STEP_SUMMARY
           echo '| test | ${{ needs.test.result }} |' >> $GITHUB_STEP_SUMMARY
           echo '| coverage | ${{ needs.coverage.result }} |' >> $GITHUB_STEP_SUMMARY
-          echo '| release | ${{ needs.release.result }} |' >> $GITHUB_STEP_SUMMARY
+          # echo '| release | ${{ needs.release.result }} |' >> $GITHUB_STEP_SUMMARY

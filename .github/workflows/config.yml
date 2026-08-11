@@ -10,7 +10,7 @@ on:
       python-version:
         required: false
         type: string
-        default: "3.14"
+        default: "3.13"
     outputs:
       acceptance:
         description: "Flag reporting if we should run the acceptance jobs"
@@ -99,9 +99,9 @@ jobs:
             devops:
               - 'devops/**'
             docs:
-              - '.readthedocs.yaml'
               - 'docs/**'
-              - '.github/workflows/docs.yaml'
+              - '.github/workflows/docs.yml'
+              - '.github/workflows/pages.yml'
             frontend:
               - 'frontend/**'
               - '.github/workflows/frontend*'

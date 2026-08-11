@@ -21,6 +21,8 @@
   },
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
+    "test": "vitest --run",
+    "check:ts": "tsc --noEmit",
     "dry-release": "release-it --dry-run",
     "release": "release-it",
     "release-major-alpha": "release-it major --preRelease=alpha",
@@ -30,8 +32,13 @@
   "theme": "",
   "dependencies": {},
   "peerDependencies": {
+    "@plone/volto": ">=19.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-intl": "^3.12.1",
+    "react-redux": "^8.1.2",
+    "react-router-dom": "^5.2.0",
+    "semantic-ui-react": "^2.1.5"
   },
   "devDependencies": {
     "@plone/registry": "workspace:*",
@@ -39,6 +46,7 @@
     "@plone/types": "workspace:*",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
+    "@types/react-router-dom": "^5.3.3",
     "typescript": "^5.7.3",
     "@testing-library/react": "^16.2.0",
     "release-it": "^19.0.5",
