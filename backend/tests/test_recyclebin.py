@@ -12,6 +12,7 @@ from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
 import unittest
+from unittest.mock import patch
 
 
 # Test content factory functions for reusability
@@ -835,6 +836,36 @@ class RecycleBinStorageTests(RecycleBinTestCase):
         del self.recyclebin.storage[recycle_id]
         index_items = list(self.recyclebin.storage._sorted_index)
         self.assertEqual(len(index_items), 0)
+
+    def test_storage_get_oldest_item(self):
+        """The oldest item is retrieved directly from the sorted index."""
+        newer_date = datetime.now()
+        older_date = newer_date - timedelta(days=1)
+        self.recyclebin.storage["newer"] = {"deletion_date": newer_date}
+        self.recyclebin.storage["older"] = {"deletion_date": older_date}
+
+        item_id, item_data = self.recyclebin.storage.get_oldest_item()
+
+        self.assertEqual("older", item_id)
+        self.assertEqual(older_date, item_data["deletion_date"])
+
+    def test_storage_get_oldest_item_when_empty(self):
+        """An empty sorted index has no retention candidate."""
+        self.assertIsNone(self.recyclebin.storage.get_oldest_item())
+
+    def test_default_date_search_does_not_request_fallback_dates(self):
+        """Existing deletion dates are ordered without generating new dates."""
+        obj = create_test_content(self.portal, "Document", "-date-sort")
+        self._add_item_to_recyclebin(obj)
+
+        with patch.object(
+            type(self.recyclebin),
+            "_get_deletion_date",
+            side_effect=AssertionError("unexpected fallback date"),
+        ):
+            results = self.recyclebin.search()
+
+        self.assertEqual(1, len(results))
 
 
 class RecycleBinSecurityTests(RecycleBinTestCase):

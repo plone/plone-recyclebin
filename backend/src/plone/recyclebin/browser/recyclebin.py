@@ -624,7 +624,7 @@ class RecycleBinView(RecycleBinWorkflowMixin, form.Form):
         elif sort_option == "size_desc":
             items.sort(key=lambda x: x.get("size", 0), reverse=True)
         elif sort_option == "date_asc":
-            items.sort(key=lambda x: x.get("deletion_date", datetime.now()))
+            items.sort(key=lambda x: x["deletion_date"])
         elif sort_option == "workflow_asc":
             items.sort(key=lambda x: (x.get("workflow_state") or "").lower())
         elif sort_option == "workflow_desc":
@@ -633,9 +633,7 @@ class RecycleBinView(RecycleBinWorkflowMixin, form.Form):
             )
         else:
             # Default: date_desc
-            items.sort(
-                key=lambda x: x.get("deletion_date", datetime.now()), reverse=True
-            )
+            items.sort(key=lambda x: x["deletion_date"], reverse=True)
         return items
 
     def get_items(self):  # noqa: C901

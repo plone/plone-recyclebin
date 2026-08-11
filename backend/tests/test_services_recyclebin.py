@@ -5,6 +5,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_PASSWORD
 from plone.recyclebin.interfaces import IRecycleBin
 from plone.recyclebin.interfaces import IRecycleBinSettings
+from plone.recyclebin.services.recyclebin.get import RecycleBinGet
 from plone.recyclebin.testing import FUNCTIONAL_TESTING
 from plone.registry.interfaces import IRegistry
 from plone.restapi.testing import RelativeSession
@@ -13,6 +14,7 @@ from zope.component import getUtility
 import plone.api as api
 import transaction
 import unittest
+from unittest.mock import patch
 
 
 class RecycleBinTestBase(unittest.TestCase):
@@ -320,6 +322,24 @@ class TestRecycleBinGET(RecycleBinTestBase):
         )
         titles = [item["title"] for item in response.json()["items"]]
         self.assertEqual(["Zebra", "Apple"], titles)
+
+    def test_listing_serializes_only_requested_batch(self):
+        """Listing serialization work is limited to the requested page."""
+        for number in range(3):
+            self._add_document_to_recyclebin(
+                doc_id=f"batch-doc-{number}", doc_title=f"Batch {number}"
+            )
+
+        original_serialize_item = RecycleBinGet._serialize_item
+        with patch.object(
+            RecycleBinGet, "_serialize_item", autospec=True
+        ) as serialize_item:
+            serialize_item.side_effect = original_serialize_item
+            response = self.api_session.get("/@recyclebin?b_size=1")
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(1, len(response.json()["items"]))
+        self.assertEqual(1, serialize_item.call_count)
 
     # ------------------------------------------------------------------
     # Individual item tests

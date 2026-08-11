@@ -106,16 +106,33 @@ class RecycleBinStorage(Persistent):
         Returns:
             Generator yielding (item_id, item_data) tuples
         """
-        sorted_keys = list(self._sorted_index)
-
-        # If we want newest first (reverse=True), reverse the list
+        # BTrees iterate in ascending key order without materializing all keys.
+        # Reversing still requires a list because TreeSet is not reversible.
+        sorted_keys = self._sorted_index
         if reverse:
-            sorted_keys.reverse()
+            sorted_keys = reversed(list(sorted_keys))
 
         # Yield items in the requested order
         for _date, item_id in sorted_keys:
             if item_id in self.items:  # Double check item still exists
                 yield (item_id, self.items[item_id])
+
+    def get_oldest_item(self):
+        """Return the oldest ``(item_id, item_data)`` pair, or ``None``.
+
+        The sorted index is keyed by ``(deletion_date, item_id)``, so ``minKey``
+        finds the retention candidate without walking the recycle bin.
+        """
+        while self._sorted_index:
+            sort_key = self._sorted_index.minKey()
+            _deletion_date, item_id = sort_key
+            if item_id in self.items:
+                return item_id, self.items[item_id]
+
+            # Repair a stale index entry defensively. Normal storage operations
+            # keep both BTrees in sync.
+            self._sorted_index.remove(sort_key)
+        return None
 
     def clear(self):
         """Clear all items from the storage"""
@@ -298,9 +315,16 @@ class RecycleBin:
     def get_items(self):
         """Return all items in recycle bin"""
         return [
-            {**{k: v for k, v in data.items() if k != "object"}, "recycle_id": item_id}
+            self._item_metadata(item_id, data)
             for item_id, data in self.storage.get_items_sorted_by_date(reverse=True)
         ]
+
+    def _item_metadata(self, item_id, data):
+        """Return public recycle-bin metadata without the stored object."""
+        return {
+            **{key: value for key, value in data.items() if key != "object"},
+            "recycle_id": item_id,
+        }
 
     def search(  # noqa: C901
         self,
@@ -321,12 +345,30 @@ class RecycleBin:
         The ``title`` and ``path`` filters also search recursively through
         children so that a nested child match surfaces the parent item.
         """
-        items = self.get_items()
         reverse = sort_order != "ascending"
+        valid_sort_fields = {
+            "title",
+            "portal_type",
+            "path",
+            "deletion_date",
+            "review_state",
+        }
+        if sort_on not in valid_sort_fields:
+            sort_on = "deletion_date"
+
+        # Date ordering is already maintained by the secondary BTree index.
+        # For other fields, retain the previous newest-first input order so the
+        # stable sort keeps the same tie-breaking behavior.
+        date_sorted = sort_on == "deletion_date"
+        items = self.storage.get_items_sorted_by_date(
+            reverse=reverse if date_sorted else True
+        )
+        title_lower = title.lower() if title else None
+        path_lower = path.lower() if path else None
 
         # --- filtering ---
         filtered = []
-        for item in items:
+        for item_id, item in items:
             if (
                 portal_type
                 and item.get("portal_type") != portal_type
@@ -368,8 +410,7 @@ class RecycleBin:
             if review_state and item.get("review_state") != review_state:
                 continue
 
-            if title:
-                title_lower = title.lower()
+            if title_lower:
                 if title_lower not in item.get(
                     "title", ""
                 ).lower() and not self._children_match(
@@ -377,8 +418,7 @@ class RecycleBin:
                 ):
                     continue
 
-            if path:
-                path_lower = path.lower()
+            if path_lower:
                 if path_lower not in item.get(
                     "path", ""
                 ).lower() and not self._children_match(
@@ -386,20 +426,19 @@ class RecycleBin:
                 ):
                     continue
 
-            filtered.append(item)
+            filtered.append(self._item_metadata(item_id, item))
 
         # --- sorting ---
+        if date_sorted:
+            return filtered
+
         sort_keys = {
             "title": lambda x: x.get("title", "").lower(),
             "portal_type": lambda x: x.get("portal_type", "").lower(),
             "path": lambda x: x.get("path", "").lower(),
-            "deletion_date": lambda x: x.get(
-                "deletion_date", self._get_deletion_date()
-            ),
             "review_state": lambda x: (x.get("review_state") or "").lower(),
         }
-        key_fn = sort_keys.get(sort_on, sort_keys["deletion_date"])
-        filtered.sort(key=key_fn, reverse=reverse)
+        filtered.sort(key=sort_keys[sort_on], reverse=reverse)
 
         return filtered
 
@@ -813,10 +852,10 @@ class RecycleBin:
             cutoff_date = datetime.now() - timedelta(days=retention_days)
             purge_count = 0
 
-            # Use sorted index for efficient date-based removal (oldest first)
-            for item_id, data in list(
-                self.storage.get_items_sorted_by_date(reverse=False)
-            ):
+            # The sorted index is keyed by (deletion_date, item_id), so only
+            # inspect and remove entries from its oldest edge.
+            while oldest_item := self.storage.get_oldest_item():
+                item_id, data = oldest_item
                 deletion_date = data.get("deletion_date")
 
                 # If item is older than retention period, purge it
@@ -828,9 +867,12 @@ class RecycleBin:
                             item_id,
                             deletion_date,
                         )
+                    else:
+                        # Avoid retrying the same oldest item forever if removal
+                        # fails and leaves the index unchanged.
+                        break
                 else:
-                    # Since items are sorted by date, once we find an item newer than
-                    # the cutoff date, we can stop checking
+                    # Once the oldest item is still retained, every other item is too.
                     break
 
             return purge_count

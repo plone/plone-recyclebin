@@ -168,12 +168,8 @@ class RecycleBinGet(Service):
             sort_order=form.get("sort_order", "descending"),
         )
 
-        serialized_items = [
-            self._serialize_item(item, item["recycle_id"]) for item in items
-        ]
-
-        # Apply batching
-        batch = HypermediaBatch(self.request, serialized_items)
+        # Batch before serialization so only the requested page is serialized.
+        batch = HypermediaBatch(self.request, items)
 
         results = {}
         results["@id"] = batch.canonical_url
@@ -182,6 +178,8 @@ class RecycleBinGet(Service):
         if links:
             results["batching"] = links
 
-        results["items"] = list(batch)
+        results["items"] = [
+            self._serialize_item(item, item["recycle_id"]) for item in batch
+        ]
 
         return results
