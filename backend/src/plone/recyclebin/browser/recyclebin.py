@@ -1,6 +1,6 @@
 from datetime import datetime
-from plone.base import PloneMessageFactory as _
 from plone.base.batch import Batch
+from plone.recyclebin import _
 from plone.recyclebin.interfaces import IRecycleBin
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile

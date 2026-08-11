@@ -1,7 +1,10 @@
+from plone.base.utils import get_installer
+from plone.recyclebin import PACKAGE_NAME
 from plone.recyclebin.interfaces import IRecycleBin
 from Products.CMFCore.interfaces import IContentish
 from zope.component import adapter
 from zope.component import queryUtility
+from zope.component.hooks import getSite
 from zope.lifecycleevent.interfaces import IObjectRemovedEvent
 
 
@@ -23,6 +26,12 @@ def handle_content_removal(obj, event):
     # it means obj is a child being notified indirectly — it will be captured as
     # nested data when the parent container is added to the recycle bin.
     if event.object is not obj:
+        return
+
+    # This subscriber remains registered while the Python package is loaded,
+    # including for sites where its GenericSetup profile is not installed.
+    site = getSite()
+    if site is None or not get_installer(site).is_product_installed(PACKAGE_NAME):
         return
 
     # Get the recycle bin

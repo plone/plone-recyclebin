@@ -6,7 +6,7 @@ from DateTime import DateTime
 from datetime import datetime
 from datetime import timedelta
 from persistent import Persistent
-from plone.base import PloneMessageFactory as _
+from plone.recyclebin import _
 from plone.recyclebin.interfaces import IRecycleBin
 from plone.recyclebin.interfaces import IRecycleBinSettings
 from plone.registry.interfaces import IRegistry
@@ -410,21 +410,23 @@ class RecycleBin:
             if review_state and item.get("review_state") != review_state:
                 continue
 
-            if title_lower:
-                if title_lower not in item.get(
-                    "title", ""
-                ).lower() and not self._children_match(
+            if (
+                title_lower
+                and title_lower not in item.get("title", "").lower()
+                and not self._children_match(
                     item.get("children", {}), "title", title_lower
-                ):
-                    continue
+                )
+            ):
+                continue
 
-            if path_lower:
-                if path_lower not in item.get(
-                    "path", ""
-                ).lower() and not self._children_match(
+            if (
+                path_lower
+                and path_lower not in item.get("path", "").lower()
+                and not self._children_match(
                     item.get("children", {}), "path", path_lower
-                ):
-                    continue
+                )
+            ):
+                continue
 
             filtered.append(self._item_metadata(item_id, item))
 

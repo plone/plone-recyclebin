@@ -1,99 +1,64 @@
 # plone.recyclebin
 
-A recycle bin for Plone
+`plone.recyclebin` is the backend of
+[Plone Recycle Bin](https://github.com/plone/plone-recyclebin).
+It preserves deleted content so site managers can restore it before it is
+permanently removed.
 
 ## Features
 
-- Keeps deleted Plone content in per-site persistent storage.
-- Restores complete content trees to their original or a selected destination.
-- Supports restoring individual descendants from a deleted folder.
-- Filters and sorts deleted content by title, path, type, deletion date, user,
-  language, workflow state, and whether it contains descendants.
-- Purges individual entries, empties the bin, and automatically expires entries
-  according to the configured retention period.
-- Provides Classic UI views plus the `@recyclebin` REST API used by Volto.
+- Stores deleted content trees separately for each Plone site.
+- Restores complete trees to their original location or another container.
+- Restores individual descendants from a deleted folder.
+- Filters and sorts entries by metadata such as path, type, deletion date,
+  language, and workflow state.
+- Purges individual entries, empties the bin, and expires old entries during
+  recycle-bin activity according to the configured retention period.
+- Provides Classic UI views and an `@recyclebin` REST API for Volto.
 
-Deleted content is recycled by default after installing the add-on. The
-**Recycle bin** control panel can disable capture of new deletions and
-configure retention and workflow behavior; existing recycled items remain
-available when capture is disabled.
+Recycling is enabled when the add-on is installed. Site managers can disable
+capture of new deletions or configure retention and workflow behavior in
+**Site Setup → Recycle bin**. Disabling capture does not hide or clear existing
+entries.
+
+## Requirements
+
+- Python 3.11 or later
+- Plone 6.1 or 6.2
+
+The REST API is registered when `plone.restapi` is available. It is required
+when using the `volto-recyclebin` frontend.
 
 ## Installation
 
-Install plone.recyclebin with uv.
+Add `plone.recyclebin` to the dependencies of your backend policy package,
+install your project's dependencies, and then install **plone.recyclebin** in
+**Site Setup → Add-ons**. Automated deployments can apply the GenericSetup
+profile `plone.recyclebin:default`.
+
+See the complete
+[installation guide](https://plone.github.io/plone-recyclebin/how-to-guides/install.html)
+for backend and Volto setup.
+
+## Development
+
+Clone the repository and install the backend development environment:
 
 ```shell
-uv add plone.recyclebin
+git clone git@github.com:plone/plone-recyclebin.git
+cd plone-recyclebin/backend
+make install
 ```
 
-Create the Plone site.
-
-```shell
-make create-site
-```
+Run `make help` for the available development, formatting, internationalization,
+and test commands.
 
 ## Contribute
 
 - [Issue tracker](https://github.com/plone/plone-recyclebin/issues)
-- [Source code](https://github.com/plone/plone-recyclebin/)
-
-### Prerequisites ✅
-
--   An [operating system](https://6.docs.plone.org/install/create-project-cookieplone.html#prerequisites-for-installation) that runs all the requirements mentioned.
--   [uv](https://6.docs.plone.org/install/create-project-cookieplone.html#uv)
--   [Make](https://6.docs.plone.org/install/create-project-cookieplone.html#make)
--   [Git](https://6.docs.plone.org/install/create-project-cookieplone.html#git)
--   [Docker](https://docs.docker.com/get-started/get-docker/) (optional)
-
-### Installation 🔧
-
-1.  Clone this repository.
-
-    ```shell
-    git clone git@github.com:plone/plone-recyclebin.git
-    cd plone-recyclebin/backend
-    ```
-
-2.  Install this code base.
-
-    ```shell
-    make install
-    ```
-
-
-### Add features using `plonecli` or `bobtemplates.plone`
-
-This package provides markers as strings (`<!-- extra stuff goes here -->`) that are compatible with [`plonecli`](https://github.com/plone/plonecli) and [`bobtemplates.plone`](https://github.com/plone/bobtemplates.plone).
-These markers act as hooks to add all kinds of features through subtemplates, including behaviors, control panels, upgrade steps, or other subtemplates from `bobtemplates.plone`.
-`plonecli` is a command line client for `bobtemplates.plone`, adding autocompletion and other features.
-
-To add a feature as a subtemplate to your package, use the following command pattern.
-
-```shell
-make add <template_name>
-```
-
-For example, you can add a content type to your package with the following command.
-
-```shell
-make add content_type
-```
-
-You can add a behavior with the following command.
-
-```shell
-make add behavior
-```
-
-```{seealso}
-You can check the list of available subtemplates in the [`bobtemplates.plone` `README.md` file](https://github.com/plone/bobtemplates.plone/?tab=readme-ov-file#provided-subtemplates).
-See also the documentation of [Mockup and Patternslib](https://6.docs.plone.org/classic-ui/mockup.html) for how to build the UI toolkit for Classic UI.
-```
+- [Source code](https://github.com/plone/plone-recyclebin)
+- [Documentation](https://plone.github.io/plone-recyclebin/)
 
 ## License
 
-The project is licensed under GPLv2.
-
-## Credits and acknowledgements 🙏
-
-Generated using [Cookieplone (2.0.0b3)](https://github.com/plone/cookieplone) and [cookieplone-templates (c281198)](https://github.com/plone/cookieplone-templates/commit/c28119899af4373696232a54210fac17fcf79dc7) on 2026-08-04 14:01:41.750538. A special thanks to all contributors and supporters!
+This package is licensed under GPL-2.0-only.

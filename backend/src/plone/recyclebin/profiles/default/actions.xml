@@ -8,7 +8,7 @@
   >
     <object meta_type="CMF Action"
             name="recyclebin"
-            i18n:domain="plone"
+            i18n:domain="plone.recyclebin"
     >
       <property name="title"
                 i18n:translate=""

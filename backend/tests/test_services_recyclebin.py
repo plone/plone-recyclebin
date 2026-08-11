@@ -9,12 +9,12 @@ from plone.recyclebin.services.recyclebin.get import RecycleBinGet
 from plone.recyclebin.testing import FUNCTIONAL_TESTING
 from plone.registry.interfaces import IRegistry
 from plone.restapi.testing import RelativeSession
+from unittest.mock import patch
 from zope.component import getUtility
 
 import plone.api as api
 import transaction
 import unittest
-from unittest.mock import patch
 
 
 class RecycleBinTestBase(unittest.TestCase):

@@ -9,10 +9,10 @@ from plone.recyclebin.interfaces import IRecycleBin
 from plone.recyclebin.interfaces import IRecycleBinSettings
 from plone.recyclebin.testing import INTEGRATION_TESTING
 from plone.registry.interfaces import IRegistry
+from unittest.mock import patch
 from zope.component import getUtility
 
 import unittest
-from unittest.mock import patch
 
 
 # Test content factory functions for reusability

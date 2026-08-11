@@ -19,10 +19,17 @@ for installation, usage, configuration, architecture, and REST API details.
 
 ## Credits and acknowledgements 🙏
 
-The Plone recycle bin was originally implemented in branches of Plone core by Rohan Shaw, with the intent of becoming a core Plone feature via (PLIP 2966)[https://github.com/plone/Products.CMFPlone/issues/2966].
-David Glick and Andrea Cecchi reviewed and made improvements.
+The Plone recycle bin was originally implemented in branches of Plone core by
+Rohan Shaw, with the intent of becoming a core Plone feature via
+[PLIP 2966](https://github.com/plone/Products.CMFPlone/issues/2966). David Glick
+and Andrea Cecchi reviewed and improved that work.
 
-The community gave feedback that it would be preferable to have the recycle bin as an add-on, so that we can gain confidence in the implementation and so that it is available in older versions of Plone.
-David Glick converted the implementation to an add-on and added the Volto frontend with assistance from Codex.
+The community preferred to gain confidence in the implementation as an add-on
+and make it available to older Plone versions. David Glick converted the
+implementation to an add-on and added the Volto frontend with assistance from
+Codex.
 
-Add-on boilerplate generated using [Cookieplone (2.0.0b3)](https://github.com/plone/cookieplone) and [cookieplone-templates (c281198)](https://github.com/plone/cookieplone-templates/commit/c28119899af4373696232a54210fac17fcf79dc7) on 2026-08-04 14:01:41.750538. A special thanks to all contributors and supporters!
+The add-on boilerplate was generated with
+[Cookieplone 2.0.0b3](https://github.com/plone/cookieplone) and
+[cookieplone-templates c281198](https://github.com/plone/cookieplone-templates/commit/c28119899af4373696232a54210fac17fcf79dc7).
+Thank you to all contributors and supporters.
