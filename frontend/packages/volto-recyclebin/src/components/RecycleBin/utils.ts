@@ -1,11 +1,4 @@
-import config from '@plone/volto/registry';
-import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
-import type {
-  GetRecycleBinItemResponse,
-  GetRecycleBinResponse,
-  RecycleBinItemSummary,
-  RecycleBinQuery,
-} from '../../types';
+import type { RecycleBinItemSummary, RecycleBinQuery } from '../../types';
 
 export type RecycleBinSortBy =
   | 'date_desc'
@@ -122,97 +115,6 @@ export function getFilterOptions(
   return Array.from(
     new Set(items.map((item) => item[key]).filter(Boolean) as string[]),
   ).sort();
-}
-
-export function formatRecycleBinDate(value?: string, locale = 'en') {
-  if (!value) return '';
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return value;
-  return new Intl.DateTimeFormat(locale, {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-  }).format(date);
-}
-
-export function getPagination(total: number, bStart?: string, bSize?: string) {
-  const parsedStart = Number(bStart ?? 0);
-  const parsedSize = Number(bSize ?? 25);
-  const offset = Number.isFinite(parsedStart) ? parsedStart : 0;
-  const size = Number.isFinite(parsedSize) && parsedSize > 0 ? parsedSize : 25;
-  const end = Math.min(offset + size, total);
-  return {
-    start: total === 0 ? 0 : offset + 1,
-    end,
-    size,
-    previousStart: Math.max(0, offset - size),
-    nextStart: offset + size,
-    hasPrevious: offset > 0,
-    hasNext: end < total,
-  };
-}
-
-function portalBasePath() {
-  const apiPath = config.settings.apiPath || '';
-  try {
-    return new URL(apiPath, 'http://localhost').pathname.replace(/\/$/, '');
-  } catch {
-    return '';
-  }
-}
-
-export function stripPortalBasePath(path: string) {
-  const flattened = flattenToAppURL(path);
-  const basePath = portalBasePath();
-  if (
-    !basePath ||
-    basePath === '/' ||
-    (flattened !== basePath && !flattened.startsWith(`${basePath}/`))
-  ) {
-    return flattened;
-  }
-  return flattened.slice(basePath.length) || '/';
-}
-
-function normalizeBatching(batching?: Record<string, string>) {
-  if (!batching) return undefined;
-  return Object.fromEntries(
-    Object.entries(batching).map(([key, value]) => [
-      key,
-      flattenToAppURL(value),
-    ]),
-  );
-}
-
-export function normalizeRecycleBin(
-  response: GetRecycleBinResponse,
-): GetRecycleBinResponse {
-  return {
-    ...response,
-    '@id': flattenToAppURL(response['@id']),
-    batching: normalizeBatching(response.batching),
-    items: response.items.map((item) => ({
-      ...item,
-      '@id': flattenToAppURL(item['@id']),
-      path: stripPortalBasePath(item.path),
-      parent_path: stripPortalBasePath(item.parent_path),
-    })),
-  };
-}
-
-export function normalizeRecycleBinItem(
-  response: GetRecycleBinItemResponse,
-): GetRecycleBinItemResponse {
-  return {
-    ...response,
-    '@id': flattenToAppURL(response['@id']),
-    path: stripPortalBasePath(response.path),
-    parent_path: stripPortalBasePath(response.parent_path),
-    batching: normalizeBatching(response.batching),
-    items: response.items.map((item) => ({
-      ...item,
-      path: stripPortalBasePath(item.path),
-    })),
-  };
 }
 
 export function getErrorMessage(error: any) {

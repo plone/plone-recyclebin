@@ -14,7 +14,7 @@ import type { RecycleBinState } from '../../reducers/recyclebin';
 import RecycleBinItemDetails from './RecycleBinItemDetails';
 import type { RecycleBinOperationMessage } from './RecycleBinListing';
 import messages from './messages';
-import { getErrorMessage, normalizeRecycleBinItem } from './utils';
+import { getErrorMessage } from './utils';
 
 interface RootState {
   recycleBin: RecycleBinState;
@@ -44,10 +44,7 @@ export default function RecycleBinItemView() {
     dispatch(getRecycleBinItem(id, batching));
   }, [batching, dispatch, id]);
 
-  const item = useMemo(
-    () => (state.item ? normalizeRecycleBinItem(state.item) : null),
-    [state.item],
-  );
+  const item = state.item;
 
   const restore = async (targetPath?: string) => {
     setRunning(true);

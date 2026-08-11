@@ -180,6 +180,18 @@ class TestRecycleBinGET(RecycleBinTestBase):
         item = response.json()["items"][0]
         self.assertEqual("My Special Page", item["title"])
 
+    def test_get_listing_item_paths_are_portal_relative(self):
+        """Paths in the listing are relative to the portal root."""
+        self.portal.invokeFactory("Folder", "news", title="News")
+        folder = self.portal["news"]
+        folder.invokeFactory("Document", "old-news", title="Old News")
+        self._delete_to_recyclebin(folder["old-news"])
+
+        item = self.api_session.get("/@recyclebin").json()["items"][0]
+
+        self.assertEqual("/news/old-news", item["path"])
+        self.assertEqual("/news", item["parent_path"])
+
     def test_get_listing_item_has_actions(self):
         """Items in listing expose restore and purge action URLs."""
         recycle_id, _title = self._add_document_to_recyclebin()
@@ -374,6 +386,16 @@ class TestRecycleBinGET(RecycleBinTestBase):
         self.assertTrue(data["has_children"])
         self.assertGreater(data["items_total"], 0)
         self.assertGreater(len(data["items"]), 0)
+
+    def test_get_individual_item_paths_are_portal_relative(self):
+        """Root and descendant paths are relative to the portal root."""
+        recycle_id, _title = self._add_folder_to_recyclebin()
+
+        data = self.api_session.get(f"/@recyclebin/{recycle_id}").json()
+
+        self.assertEqual("/test-folder", data["path"])
+        self.assertEqual("/", data["parent_path"])
+        self.assertEqual("/test-folder/child-doc", data["items"][0]["path"])
 
     def test_get_individual_item_children_structure(self):
         """Children entries in GET /@recyclebin/{id} have expected keys."""

@@ -1,9 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
-  formatRecycleBinDate,
   getErrorMessage,
   getFilterOptions,
-  getPagination,
   getQueryState,
   listingUrl,
   performRecycleBinItems,
@@ -45,19 +43,6 @@ describe('recycle bin query helpers', () => {
 });
 
 describe('recycle bin display helpers', () => {
-  it('computes bounded pagination', () => {
-    expect(getPagination(52, '25', '25')).toEqual({
-      start: 26,
-      end: 50,
-      size: 25,
-      previousStart: 0,
-      nextStart: 50,
-      hasPrevious: true,
-      hasNext: true,
-    });
-    expect(getPagination(0)).toMatchObject({ start: 0, end: 0 });
-  });
-
   it('extracts unique sorted filter values', () => {
     const items = [
       { '@type': 'News Item', deleted_by: 'bob' },
@@ -66,13 +51,6 @@ describe('recycle bin display helpers', () => {
     ] as any;
     expect(getFilterOptions(items, '@type')).toEqual(['Document', 'News Item']);
     expect(getFilterOptions(items, 'deleted_by')).toEqual(['alice', 'bob']);
-  });
-
-  it('formats valid dates and preserves invalid input', () => {
-    expect(formatRecycleBinDate('not-a-date')).toBe('not-a-date');
-    expect(formatRecycleBinDate('2026-01-02T12:30:00Z', 'en-US')).toContain(
-      'Jan 2, 2026',
-    );
   });
 
   it('extracts REST API error messages', () => {

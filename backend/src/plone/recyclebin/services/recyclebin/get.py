@@ -67,8 +67,8 @@ class RecycleBinGet(Service):
             "id": item["id"],
             "title": item["title"],
             "@type": item["portal_type"],
-            "path": item["path"],
-            "parent_path": item["parent_path"],
+            "path": self._portal_relative_path(item["path"]),
+            "parent_path": self._portal_relative_path(item["parent_path"]),
             "deletion_date": item["deletion_date"].isoformat(),
             "recycle_id": item_id,
             "deleted_by": item.get("deleted_by", ""),
@@ -100,7 +100,7 @@ class RecycleBinGet(Service):
                 "id": child_data["id"],
                 "title": child_data["title"],
                 "@type": child_data.get("portal_type", "Unknown"),
-                "path": child_data.get("path", ""),
+                "path": self._portal_relative_path(child_data.get("path", "")),
                 "language": child_data.get("language", ""),
                 "review_state": child_data.get("review_state", ""),
                 "restore_id": child_data.get("restore_id", ""),
@@ -121,6 +121,15 @@ class RecycleBinGet(Service):
             if isinstance(nested, dict) and nested:
                 count += self._count_descendants(nested)
         return count
+
+    def _portal_relative_path(self, path):
+        """Return a physical path relative to the portal root."""
+        portal_path = "/".join(self.context.getPhysicalPath())
+        if path == portal_path:
+            return "/"
+        if path.startswith(f"{portal_path}/"):
+            return path[len(portal_path) :]
+        return path
 
     def _reply_listing(self, recycle_bin):
         """Handle GET /@recyclebin - List items in the recycle bin"""
@@ -171,8 +180,8 @@ class RecycleBinGet(Service):
                 "@type": item["portal_type"],
                 "id": item["id"],
                 "title": item["title"],
-                "path": item["path"],
-                "parent_path": item["parent_path"],
+                "path": self._portal_relative_path(item["path"]),
+                "parent_path": self._portal_relative_path(item["parent_path"]),
                 "deletion_date": item["deletion_date"].isoformat(),
                 "recycle_id": item["recycle_id"],
                 "deleted_by": item.get("deleted_by", ""),

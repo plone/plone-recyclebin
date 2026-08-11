@@ -1,12 +1,12 @@
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Header, Label, Message, Table } from 'semantic-ui-react';
+import { formatDate } from '@plone/volto/helpers/Utils/Date';
 import type { GetRecycleBinItemResponse } from '../../types';
 import RecycleBinChildrenTable from './RecycleBinChildrenTable';
 import RecycleBinRestorePanel from './RecycleBinRestorePanel';
 import type { RecycleBinOperationMessage } from './RecycleBinListing';
 import messages from './messages';
-import { formatRecycleBinDate } from './utils';
 
 export default function RecycleBinItemDetails({
   item,
@@ -61,7 +61,15 @@ export default function RecycleBinItemDetails({
           <Table.Row>
             <Table.Cell>{intl.formatMessage(messages.deletionDate)}</Table.Cell>
             <Table.Cell>
-              {formatRecycleBinDate(item.deletion_date, intl.locale)}
+              {
+                formatDate({
+                  date: item.deletion_date,
+                  format: undefined,
+                  locale: intl.locale,
+                  long: false,
+                  includeTime: true,
+                }) as string
+              }
             </Table.Cell>
           </Table.Row>
           <Table.Row>

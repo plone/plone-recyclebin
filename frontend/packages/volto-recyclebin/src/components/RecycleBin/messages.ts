@@ -1,172 +1,206 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  title: { id: 'Recycle bin', defaultMessage: 'Recycle bin' },
+  title: { id: 'recyclebin.title', defaultMessage: 'Recycle bin' },
   description: {
-    id: 'Recycle bin description',
+    id: 'recyclebin.description',
     defaultMessage:
       'Items deleted from this site are stored here and can be restored or permanently deleted.',
   },
-  search: { id: 'Search deleted items', defaultMessage: 'Search' },
-  sort: { id: 'Sort deleted items', defaultMessage: 'Sort by' },
-  pageSize: { id: 'Recycle bin page size', defaultMessage: 'Items per page' },
+  search: { id: 'recyclebin.field.search', defaultMessage: 'Search' },
+  sort: { id: 'recyclebin.field.sort', defaultMessage: 'Sort by' },
+  pageSize: {
+    id: 'recyclebin.field.page_size',
+    defaultMessage: 'Items per page',
+  },
   advanced: {
-    id: 'Advanced recycle bin filters',
+    id: 'recyclebin.filter.advanced',
     defaultMessage: 'Advanced filters',
   },
-  type: { id: 'Deleted item type', defaultMessage: 'Type' },
-  deletedBy: { id: 'Deleted by', defaultMessage: 'Deleted by' },
-  containsItems: { id: 'Contains items', defaultMessage: 'Contains items' },
-  language: { id: 'Deleted item language', defaultMessage: 'Language' },
-  workflowState: { id: 'Workflow state', defaultMessage: 'Workflow state' },
-  dateFrom: { id: 'Deleted date from', defaultMessage: 'Deleted from' },
-  dateTo: { id: 'Deleted date to', defaultMessage: 'Deleted to' },
-  any: { id: 'Any recycle bin filter value', defaultMessage: 'Any' },
+  type: { id: 'recyclebin.field.type', defaultMessage: 'Type' },
+  deletedBy: {
+    id: 'recyclebin.field.deleted_by',
+    defaultMessage: 'Deleted by',
+  },
+  containsItems: {
+    id: 'recyclebin.field.contains_items',
+    defaultMessage: 'Contains items',
+  },
+  language: { id: 'recyclebin.field.language', defaultMessage: 'Language' },
+  workflowState: {
+    id: 'recyclebin.field.workflow_state',
+    defaultMessage: 'Workflow state',
+  },
+  dateFrom: {
+    id: 'recyclebin.field.date_from',
+    defaultMessage: 'Deleted from',
+  },
+  dateTo: { id: 'recyclebin.field.date_to', defaultMessage: 'Deleted to' },
+  any: { id: 'recyclebin.filter.any', defaultMessage: 'Any' },
   withSubitems: {
-    id: 'With contained items',
+    id: 'recyclebin.filter.with_subitems',
     defaultMessage: 'With contained items',
   },
   withoutSubitems: {
-    id: 'Without contained items',
+    id: 'recyclebin.filter.without_subitems',
     defaultMessage: 'Without contained items',
   },
   applyFilters: {
-    id: 'Apply recycle bin filters',
+    id: 'recyclebin.button.apply_filters',
     defaultMessage: 'Apply filters',
   },
   clearAll: {
-    id: 'Clear recycle bin filters',
+    id: 'recyclebin.button.clear_filters',
     defaultMessage: 'Clear all filters',
   },
   selectAll: {
-    id: 'Select all deleted items',
+    id: 'recyclebin.action.select_all',
     defaultMessage: 'Select all deleted items',
   },
-  selectItem: { id: 'Select deleted item', defaultMessage: 'Select {title}' },
-  itemTitle: { id: 'Deleted item title', defaultMessage: 'Title' },
-  path: { id: 'Original path', defaultMessage: 'Original path' },
-  deletionDate: { id: 'Deletion date', defaultMessage: 'Deletion date' },
+  selectItem: {
+    id: 'recyclebin.action.select_item',
+    defaultMessage: 'Select {title}',
+  },
+  itemTitle: { id: 'recyclebin.field.title', defaultMessage: 'Title' },
+  path: { id: 'recyclebin.field.path', defaultMessage: 'Original path' },
+  deletionDate: {
+    id: 'recyclebin.field.deletion_date',
+    defaultMessage: 'Deletion date',
+  },
   hasChildren: {
-    id: 'Contains deleted items',
+    id: 'recyclebin.label.has_children',
     defaultMessage: 'Contains items',
   },
   restoreSelected: {
-    id: 'Restore selected items',
+    id: 'recyclebin.button.restore_selected',
     defaultMessage: 'Restore selected',
   },
   deleteSelected: {
-    id: 'Delete selected items permanently',
+    id: 'recyclebin.button.delete_selected',
     defaultMessage: 'Delete selected',
   },
-  empty: { id: 'Empty recycle bin', defaultMessage: 'Empty recycle bin' },
+  empty: {
+    id: 'recyclebin.button.empty',
+    defaultMessage: 'Empty recycle bin',
+  },
   confirmDeleteSelected: {
-    id: 'Confirm delete selected items',
+    id: 'recyclebin.confirm.delete_selected',
     defaultMessage:
       'Permanently delete the selected items? This cannot be undone.',
   },
   confirmDelete: {
-    id: 'Confirm permanent deletion',
+    id: 'recyclebin.confirm.delete_item',
     defaultMessage: 'Permanently delete this item? This cannot be undone.',
   },
   confirmEmpty: {
-    id: 'Confirm empty recycle bin',
+    id: 'recyclebin.confirm.empty',
     defaultMessage:
       'Permanently delete every item in the recycle bin? This cannot be undone.',
   },
   noItems: {
-    id: 'Recycle bin is empty',
+    id: 'recyclebin.message.empty',
     defaultMessage: 'The recycle bin is empty.',
   },
   noMatches: {
-    id: 'No deleted items match',
+    id: 'recyclebin.message.no_matches',
     defaultMessage: 'No items match the current filters.',
   },
   resultRange: {
-    id: 'Recycle bin result range',
+    id: 'recyclebin.message.result_range',
     defaultMessage: 'Showing {start}–{end} of {total}',
   },
-  previous: { id: 'Previous recycle bin page', defaultMessage: 'Previous' },
-  next: { id: 'Next recycle bin page', defaultMessage: 'Next' },
-  back: { id: 'Back to recycle bin', defaultMessage: 'Back to recycle bin' },
+  back: {
+    id: 'recyclebin.link.back',
+    defaultMessage: 'Back to recycle bin',
+  },
   details: {
-    id: 'Deleted item details',
+    id: 'recyclebin.heading.details',
     defaultMessage: 'Deleted item details',
   },
-  restoreTo: { id: 'Restore item to', defaultMessage: 'Restore to' },
-  targetPath: { id: 'Restore target path', defaultMessage: 'Target path' },
+  restoreTo: {
+    id: 'recyclebin.heading.restore_to',
+    defaultMessage: 'Restore to',
+  },
+  targetPath: {
+    id: 'recyclebin.field.target_path',
+    defaultMessage: 'Target path',
+  },
   targetPathHelp: {
-    id: 'Restore target path help',
+    id: 'recyclebin.help.target_path',
     defaultMessage:
       'Leave unchanged to restore to the original parent, or enter another portal-relative path.',
   },
-  restore: { id: 'Restore deleted item', defaultMessage: 'Restore' },
+  restore: { id: 'recyclebin.button.restore', defaultMessage: 'Restore' },
   permanentlyDelete: {
-    id: 'Permanently delete item',
+    id: 'recyclebin.button.permanently_delete',
     defaultMessage: 'Permanently delete',
   },
   children: {
-    id: 'Contained deleted items',
+    id: 'recyclebin.heading.children',
     defaultMessage: 'Contained items ({count})',
   },
-  childrenCount: { id: 'Nested item count', defaultMessage: 'Nested items' },
+  childrenCount: {
+    id: 'recyclebin.field.children_count',
+    defaultMessage: 'Nested items',
+  },
   childTargetPath: {
-    id: 'Child restore target path',
+    id: 'recyclebin.field.child_target_path',
     defaultMessage: 'Target path for {title}',
   },
   loading: {
-    id: 'Loading recycle bin',
+    id: 'recyclebin.message.loading',
     defaultMessage: 'Loading recycle bin…',
   },
   unavailableTitle: {
-    id: 'Recycle bin unavailable',
+    id: 'recyclebin.error.unavailable.title',
     defaultMessage: 'Recycle bin unavailable',
   },
   unavailableDescription: {
-    id: 'Recycle bin unavailable description',
+    id: 'recyclebin.error.unavailable.description',
     defaultMessage:
       'The recycle bin is unavailable, or you do not have permission to access it.',
   },
   itemNotFoundTitle: {
-    id: 'Deleted item not found',
+    id: 'recyclebin.error.not_found.title',
     defaultMessage: 'Item not found',
   },
   itemNotFoundDescription: {
-    id: 'Deleted item not found description',
+    id: 'recyclebin.error.not_found.description',
     defaultMessage:
       'This item may already have been restored or permanently deleted.',
   },
   operationSucceeded: {
-    id: 'Recycle bin operation succeeded',
+    id: 'recyclebin.message.operation_succeeded',
     defaultMessage: 'Operation completed successfully.',
   },
   partialFailure: {
-    id: 'Recycle bin partial failure',
+    id: 'recyclebin.message.partial_failure',
     defaultMessage: '{succeeded} succeeded and {failed} failed.',
   },
   dateDesc: {
-    id: 'Newest deletion first',
+    id: 'recyclebin.sort.date_desc',
     defaultMessage: 'Deletion date, newest first',
   },
   dateAsc: {
-    id: 'Oldest deletion first',
+    id: 'recyclebin.sort.date_asc',
     defaultMessage: 'Deletion date, oldest first',
   },
   titleAsc: {
-    id: 'Deleted item title ascending',
+    id: 'recyclebin.sort.title_asc',
     defaultMessage: 'Title, A–Z',
   },
   titleDesc: {
-    id: 'Deleted item title descending',
+    id: 'recyclebin.sort.title_desc',
     defaultMessage: 'Title, Z–A',
   },
-  typeAsc: { id: 'Deleted item type ascending', defaultMessage: 'Type, A–Z' },
-  typeDesc: { id: 'Deleted item type descending', defaultMessage: 'Type, Z–A' },
+  typeAsc: { id: 'recyclebin.sort.type_asc', defaultMessage: 'Type, A–Z' },
+  typeDesc: { id: 'recyclebin.sort.type_desc', defaultMessage: 'Type, Z–A' },
   workflowAsc: {
-    id: 'Workflow state ascending',
+    id: 'recyclebin.sort.workflow_asc',
     defaultMessage: 'Workflow state, A–Z',
   },
   workflowDesc: {
-    id: 'Workflow state descending',
+    id: 'recyclebin.sort.workflow_desc',
     defaultMessage: 'Workflow state, Z–A',
   },
 });

@@ -1,16 +1,10 @@
-import { defineMessages, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Plug } from '@plone/volto/components/manage/Pluggable';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import rightArrowSVG from '@plone/volto/icons/right-key.svg';
-
-const messages = defineMessages({
-  recycleBin: {
-    id: 'Recycle bin',
-    defaultMessage: 'Recycle bin',
-  },
-});
+import messages from '../RecycleBin/messages';
 
 interface UserAction {
   id?: string;
@@ -26,7 +20,7 @@ interface RootState {
 
 export function RecycleBinUserMenuPlug({ available }: { available: boolean }) {
   const intl = useIntl();
-  const title = intl.formatMessage(messages.recycleBin);
+  const title = intl.formatMessage(messages.title);
 
   return (
     <Plug

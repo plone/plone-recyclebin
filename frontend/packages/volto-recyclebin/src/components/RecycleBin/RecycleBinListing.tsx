@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import { useState, type ComponentType } from 'react';
 import { useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Header, Message, Segment } from 'semantic-ui-react';
+import Pagination from '@plone/volto/components/theme/Pagination/Pagination';
 import type { GetRecycleBinResponse } from '../../types';
 import RecycleBinActions from './RecycleBinActions';
 import RecycleBinActiveFilters from './RecycleBinActiveFilters';
 import RecycleBinFilters from './RecycleBinFilters';
 import RecycleBinTable from './RecycleBinTable';
 import messages from './messages';
-import { getPagination, listingUrl, type RecycleBinQueryState } from './utils';
+import { listingUrl, type RecycleBinQueryState } from './utils';
+
+const VoltoPagination = Pagination as unknown as ComponentType<{
+  current: number;
+  total: number;
+  onChangePage: (event: unknown, data: { value: number }) => void;
+}>;
 
 export interface RecycleBinOperationMessage {
   text: string;
@@ -34,20 +41,27 @@ export default function RecycleBinListing({
   onEmpty: () => void;
 }) {
   const intl = useIntl();
+  const history = useHistory();
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const pagination = getPagination(
-    recycleBin.items_total,
-    queryState.b_start,
-    queryState.b_size,
-  );
+  const requestedPageSize = Number(queryState.b_size ?? 25);
+  const pageSize =
+    Number.isFinite(requestedPageSize) && requestedPageSize > 0
+      ? requestedPageSize
+      : 25;
+  const requestedOffset = Number(queryState.b_start ?? 0);
+  const offset = Number.isFinite(requestedOffset) ? requestedOffset : 0;
+  const currentPage = Math.floor(offset / pageSize);
+  const totalPages = Math.ceil(recycleBin.items_total / pageSize);
+  const rangeStart = recycleBin.items_total === 0 ? 0 : offset + 1;
+  const rangeEnd = Math.min(offset + pageSize, recycleBin.items_total);
   const hasFilters = Object.entries(queryState).some(
     ([key, value]) => value && !['b_start', 'b_size', 'sort_by'].includes(key),
   );
-  const pageUrl = (offset: number) =>
+  const pageUrl = (page: number) =>
     listingUrl({
       ...queryState,
-      b_start: String(offset),
-      b_size: String(pagination.size),
+      b_start: String(page * pageSize),
+      b_size: String(pageSize),
     });
 
   return (
@@ -99,8 +113,8 @@ export default function RecycleBinListing({
         <>
           <p className="recycle-bin-range">
             {intl.formatMessage(messages.resultRange, {
-              start: pagination.start,
-              end: pagination.end,
+              start: rangeStart,
+              end: rangeEnd,
               total: recycleBin.items_total,
             })}
           </p>
@@ -117,26 +131,18 @@ export default function RecycleBinListing({
               onPurge={onPurge}
               onEmpty={onEmpty}
             />
-            {(pagination.hasPrevious || pagination.hasNext) && (
-              <nav className="recycle-bin-pagination" aria-label="Pagination">
-                {pagination.hasPrevious ? (
-                  <Link
-                    className="ui button"
-                    to={pageUrl(pagination.previousStart)}
-                  >
-                    {intl.formatMessage(messages.previous)}
-                  </Link>
-                ) : null}
-                {pagination.hasNext ? (
-                  <Link
-                    className="ui button"
-                    to={pageUrl(pagination.nextStart)}
-                  >
-                    {intl.formatMessage(messages.next)}
-                  </Link>
-                ) : null}
-              </nav>
-            )}
+            {totalPages > 1 ? (
+              <div className="recycle-bin-pagination">
+                <VoltoPagination
+                  current={currentPage}
+                  total={totalPages}
+                  onChangePage={(
+                    _event: unknown,
+                    { value }: { value: number },
+                  ) => history.push(pageUrl(value))}
+                />
+              </div>
+            ) : null}
           </div>
         </>
       )}

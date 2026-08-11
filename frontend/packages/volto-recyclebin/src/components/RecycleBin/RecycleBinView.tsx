@@ -19,7 +19,6 @@ import messages from './messages';
 import {
   getErrorMessage,
   getQueryState,
-  normalizeRecycleBin,
   performRecycleBinItems,
   toRecycleBinQuery,
 } from './utils';
@@ -46,10 +45,7 @@ export default function RecycleBinView() {
     dispatch(getRecycleBin(toRecycleBinQuery(queryState)));
   }, [dispatch, queryState]);
 
-  const listing = useMemo(
-    () => (state.listing ? normalizeRecycleBin(state.listing) : null),
-    [state.listing],
-  );
+  const listing = state.listing;
 
   const refresh = () => dispatch(getRecycleBin(toRecycleBinQuery(queryState)));
 

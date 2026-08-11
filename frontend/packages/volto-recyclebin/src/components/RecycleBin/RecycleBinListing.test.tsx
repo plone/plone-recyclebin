@@ -1,12 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { recycleBinFixture } from './fixtures';
 import RecycleBinListing from './RecycleBinListing';
 
 // react-intl 3's declarations predate React 18's explicit children typing.
 const TestIntlProvider = IntlProvider as any;
+
+function LocationDisplay() {
+  const location = useLocation();
+  return <span data-testid="location">{location.search}</span>;
+}
 
 function renderListing(recycleBin = recycleBinFixture, onRestore = vi.fn()) {
   render(
@@ -74,5 +79,31 @@ describe('RecycleBinListing', () => {
     expect(
       screen.getByText('No items match the current filters.'),
     ).toBeTruthy();
+  });
+
+  it('uses Volto pagination to update the batch query', () => {
+    render(
+      <TestIntlProvider locale="en">
+        <MemoryRouter initialEntries={['/@@recyclebin?b_size=25']}>
+          <RecycleBinListing
+            recycleBin={{ ...recycleBinFixture, items_total: 52 }}
+            queryState={{ b_size: '25' }}
+            busy={false}
+            onRestore={vi.fn()}
+            onPurge={vi.fn()}
+            onEmpty={vi.fn()}
+          />
+          <LocationDisplay />
+        </MemoryRouter>
+      </TestIntlProvider>,
+    );
+
+    fireEvent.click(screen.getByText('2'));
+
+    const params = new URLSearchParams(
+      screen.getByTestId('location').textContent!,
+    );
+    expect(params.get('b_start')).toBe('25');
+    expect(params.get('b_size')).toBe('25');
   });
 });

@@ -1,9 +1,9 @@
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Checkbox, Label, Table } from 'semantic-ui-react';
+import { formatDate } from '@plone/volto/helpers/Utils/Date';
 import type { RecycleBinItemSummary } from '../../types';
 import messages from './messages';
-import { formatRecycleBinDate } from './utils';
 
 export default function RecycleBinTable({
   items,
@@ -91,7 +91,15 @@ export default function RecycleBinTable({
               <Table.Cell>{item.review_state || '—'}</Table.Cell>
               <Table.Cell className="recycle-bin-path">{item.path}</Table.Cell>
               <Table.Cell>
-                {formatRecycleBinDate(item.deletion_date, intl.locale)}
+                {
+                  formatDate({
+                    date: item.deletion_date,
+                    format: undefined,
+                    locale: intl.locale,
+                    long: false,
+                    includeTime: true,
+                  }) as string
+                }
               </Table.Cell>
               <Table.Cell>{item.deleted_by}</Table.Cell>
             </Table.Row>

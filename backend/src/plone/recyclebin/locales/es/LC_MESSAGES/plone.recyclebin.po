@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-08-07 18:27+0000\n"
+"POT-Creation-Date: 2026-08-11 18:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,7 +118,7 @@ msgstr ""
 msgid "Permanently delete"
 msgstr ""
 
-#: plone/recyclebin/controlpanels/recyclebin.py:15
+#: plone/recyclebin/controlpanels/recyclebin.py:13
 msgid "Recycle bin"
 msgstr ""
 
