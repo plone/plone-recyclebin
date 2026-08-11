@@ -5,9 +5,9 @@
 # -- Path setup --------------------------------------------------------------
 
 from datetime import datetime
+from pathlib import Path
 
 from packaging.version import Version
-from plone_sphinx_theme import __version__
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -32,7 +32,7 @@ copyright = year
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = __version__
+release = (Path(__file__).parents[2] / "version.txt").read_text().strip()
 # The short X.Y version.
 version = "v" + (Version(str(release)).base_version)
 
@@ -62,6 +62,7 @@ extensions = [
     "sphinx.ext.autosummary",  # plone.api
     "sphinx.ext.doctest",  # plone.api
     "sphinx.ext.graphviz",
+    "sphinx.ext.githubpages",
     "sphinx.ext.ifconfig",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
@@ -95,7 +96,7 @@ linkcheck_ignore = [
     # Ignore file downloads
     r"^/_static/",
     # Ignore pages that require authentication
-    r"https://github.com/plone/plonerecyclebin/issues/new",  # requires auth
+    r"https://github.com/plone/plone-recyclebin/issues/new",  # requires auth
     # Ignore github.com pages with anchors
     r"https://github.com/.*#.*",
     # Ignore other specific anchors
@@ -129,8 +130,6 @@ suppress_warnings = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = "plone_sphinx_theme"  # This can be configured
-html_logo = "_static/logo.svg"
-html_favicon = "_static/favicon.ico"
 # The default value includes icon-links, so override it with that one omitted, and add it to html_theme_options[footer_content_items].
 html_sidebars = {
     "**": [
@@ -141,8 +140,11 @@ html_sidebars = {
 }
 html_theme_options = {
     "article_header_start": ["toggle-primary-sidebar"],
-    # "extra_footer": """<p>Example `extra_footer` content. License info. Trademark info and usage.</p>
-    # <p>Pull request previews by <a href="https://readthedocs.org/">Read the Docs</a>.</p>""",
+    "extra_footer": (
+        '<p>Published with GitHub Pages. '
+        '<a href="https://github.com/plone/plone-recyclebin/graphs/contributors">'
+        "Thank you to all contributors.</a></p>"
+    ),
     "footer_content_items": [
         "author",
         "copyright",
@@ -155,7 +157,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/plone/plonerecyclebin",
+            "url": "https://github.com/plone/plone-recyclebin",
             "icon": "fa-brands fa-square-github",
             "type": "fontawesome",
             "attributes": {
@@ -182,7 +184,7 @@ html_theme_options = {
     "navigation_with_keys": True,
     "path_to_docs": "docs/docs",
     "repository_branch": "main",
-    "repository_url": "https://github.com/plone/plonerecyclebin",
+    "repository_url": "https://github.com/plone/plone-recyclebin",
     "search_bar_text": "Search",
     "show_toc_level": 2,
     "use_edit_page_button": True,
@@ -192,12 +194,12 @@ html_theme_options = {
 # suggest edit link
 # remark:  is mandatory in "edit_page_url_template"
 # html_context = {
-#     "edit_page_url_template": "https://github.com/plone/plonerecyclebin/edit/main/docs/",
+#     "edit_page_url_template": "https://github.com/plone/plone-recyclebin/edit/main/docs/",
 # }
 
 # Announce that we have an opensearch plugin
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_use_opensearch
-html_use_opensearch = "https://MY_READTHEDOCS_PROJECT_SLUG.readthedocs.io"
+html_use_opensearch = "https://plone.github.io/plone-recyclebin/"
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -235,7 +237,7 @@ autodoc_class_signature = "separated"
 # -- Options for sphinx_sitemap to html -----------------------------
 
 # Used by sphinx_sitemap to generate a sitemap
-html_baseurl = "https://MY_READTHEDOCS_PROJECT_SLUG.readthedocs.io/"
+html_baseurl = "https://plone.github.io/plone-recyclebin/"
 # https://sphinx-sitemap.readthedocs.io/en/latest/advanced-configuration.html#customizing-the-url-scheme
 sitemap_url_scheme = "{link}"
 sitemap_filename = "sitemap-custom.xml"
@@ -283,9 +285,8 @@ mermaid_version = "11.2.0"
 
 
 # -- OpenGraph configuration ----------------------------------
-ogp_site_url = "https://MY_READTHEDOCS_PROJECT_SLUG.readthedocs.io/"
+ogp_site_url = "https://plone.github.io/plone-recyclebin/"
 ogp_description_length = 200
-ogp_image = "https://MY_READTHEDOCS_PROJECT_SLUG/_static/MY_LOGO.svg"
 ogp_site_name = "Plone Recycle Bin Documentation"
 ogp_type = "website"
 ogp_custom_meta_tags = [
@@ -337,11 +338,6 @@ latex_documents = [
         "manual",
     ),
 ]
-
-# The name of an image file (relative to this directory) to place at the top of
-# the title page.
-latex_logo = "_static/logo.svg"
-
 
 # --  Configuration for source_replacements extension -----------------------
 # An extension that allows replacements for code blocks that

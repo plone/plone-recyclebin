@@ -7,23 +7,41 @@ myst:
     "keywords": "Plone Recycle Bin, documentation, A recycle bin for Plone"
 ---
 
-# Plone Recycle Bin
+# Plone Recycle Bin ♻️
 
-Welcome to the documentation for Plone Recycle Bin!
-A recycle bin for Plone
+Plone Recycle Bin gives site managers a recovery window after content is
+deleted. It preserves complete content trees, provides a management interface
+for Classic UI and Volto, and exposes the same operations through a REST API.
 
-This scaffold provides a ready-to-use environment for creating comprehensive documentation for {term}`Plone` projects, based on {term}`Plone Sphinx Theme`.
+Use these docs to install the backend and frontend packages, recover or purge
+content, configure retention and workflow behavior, and integrate with the
+REST API.
 
-Built with Markedly Structured Text ({term}`MyST`), this environment supports rich formatting, directives, and extensions tailored for technical documentation.
+```{important}
+Permanently deleting an entry from the recycle bin cannot be undone. Test your
+backup and recovery process independently of this add-on.
+```
 
-It's structured following the [Diátaxis](https://diataxis.fr/) documentation framework.
+## Choose a starting point 🧭
+
+-   Learn {doc}`how the recycle bin works <concepts/how-it-works>` and why it
+    uses persistent per-site storage.
+-   {doc}`Install the add-on <how-to-guides/install>` in a Plone and Volto
+    project.
+-   {doc}`Delete and restore items <how-to-guides/delete-and-restore>` through
+    the user interface.
+-   Use the {doc}`REST API reference <reference/rest-api>` to automate recycle
+    bin operations.
 
 ```{toctree}
-:caption: How to guides
+:caption: How-to guides
 :maxdepth: 2
 :hidden: true
 
-how-to-guides/index
+how-to-guides/install
+how-to-guides/delete-and-restore
+how-to-guides/configure
+how-to-guides/contribute
 ```
 
 ```{toctree}
@@ -31,15 +49,7 @@ how-to-guides/index
 :maxdepth: 2
 :hidden: true
 
-reference/index
-```
-
-```{toctree}
-:caption: Tutorials
-:maxdepth: 2
-:hidden: true
-
-tutorials/index
+reference/rest-api
 ```
 
 ```{toctree}
@@ -47,7 +57,7 @@ tutorials/index
 :maxdepth: 2
 :hidden: true
 
-concepts/index
+concepts/how-it-works
 ```
 
 ```{toctree}
@@ -56,5 +66,4 @@ concepts/index
 :hidden: true
 
 glossary
-genindex
 ```

@@ -99,9 +99,9 @@ jobs:
             devops:
               - 'devops/**'
             docs:
-              - '.readthedocs.yaml'
               - 'docs/**'
-              - '.github/workflows/docs.yaml'
+              - '.github/workflows/docs.yml'
+              - '.github/workflows/pages.yml'
             frontend:
               - 'frontend/**'
               - '.github/workflows/frontend*'
