@@ -58,28 +58,8 @@ class RecycleBinGet(Service):
                 }
             }
 
-        # Convert to serializable format with detailed information
         children_dict = item.get("children", {})
-        base_url = self.context.absolute_url()
-
-        serialized_item = {
-            "@id": f"{base_url}/@recyclebin/{item_id}",
-            "id": item["id"],
-            "title": item["title"],
-            "@type": item["portal_type"],
-            "path": self._portal_relative_path(item["path"]),
-            "parent_path": self._portal_relative_path(item["parent_path"]),
-            "deletion_date": item["deletion_date"].isoformat(),
-            "recycle_id": item_id,
-            "deleted_by": item.get("deleted_by", ""),
-            "language": item.get("language", ""),
-            "review_state": item.get("review_state", ""),
-            "has_children": bool(children_dict),
-            "actions": {
-                "restore": f"{base_url}/@recyclebin/{item_id}/restore",
-                "purge": f"{base_url}/@recyclebin/{item_id}",
-            },
-        }
+        serialized_item = self._serialize_item(item, item_id)
 
         # Flatten all descendants and apply batching
         flattened = list(self._flatten_children(children_dict))
@@ -131,6 +111,22 @@ class RecycleBinGet(Service):
             return path[len(portal_path) :]
         return path
 
+    def _serialize_item(self, item, recycle_id):
+        """Serialize fields shared by listing and detail responses."""
+        return {
+            "@id": f"{self.context.absolute_url()}/@recyclebin/{recycle_id}",
+            "@type": item["portal_type"],
+            "id": item["id"],
+            "title": item["title"],
+            "path": self._portal_relative_path(item["path"]),
+            "deletion_date": item["deletion_date"].isoformat(),
+            "recycle_id": recycle_id,
+            "deleted_by": item.get("deleted_by", ""),
+            "language": item.get("language", ""),
+            "review_state": item.get("review_state", ""),
+            "has_children": bool(item.get("children")),
+        }
+
     def _reply_listing(self, recycle_bin):
         """Handle GET /@recyclebin - List items in the recycle bin"""
         form = self.request.form
@@ -172,27 +168,8 @@ class RecycleBinGet(Service):
             sort_order=form.get("sort_order", "descending"),
         )
 
-        # Convert to serializable format
-        base_url = self.context.absolute_url()
         serialized_items = [
-            {
-                "@id": f"{base_url}/@recyclebin/{item['recycle_id']}",
-                "@type": item["portal_type"],
-                "id": item["id"],
-                "title": item["title"],
-                "path": self._portal_relative_path(item["path"]),
-                "parent_path": self._portal_relative_path(item["parent_path"]),
-                "deletion_date": item["deletion_date"].isoformat(),
-                "recycle_id": item["recycle_id"],
-                "deleted_by": item.get("deleted_by", ""),
-                "language": item.get("language", ""),
-                "review_state": item.get("review_state", ""),
-                "has_children": bool(item.get("children")),
-                "actions": {
-                    "restore": (f"{base_url}/@recyclebin/{item['recycle_id']}/restore"),
-                    "purge": f"{base_url}/@recyclebin/{item['recycle_id']}",
-                },
-            }
+            self._serialize_item(item, item["recycle_id"])
             for item in items
         ]
 

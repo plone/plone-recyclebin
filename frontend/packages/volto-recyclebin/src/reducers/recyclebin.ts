@@ -1,16 +1,8 @@
-import {
-  EMPTY_RECYCLE_BIN,
-  GET_RECYCLE_BIN,
-  GET_RECYCLE_BIN_ITEM,
-  PURGE_RECYCLE_BIN_ITEM,
-  RESET_RECYCLE_BIN_OPERATION,
-  RESTORE_RECYCLE_BIN_ITEM,
-} from '../constants';
+import { GET_RECYCLE_BIN, GET_RECYCLE_BIN_ITEM } from '../constants';
 import type {
   GetRecycleBinItemResponse,
   GetRecycleBinResponse,
   RequestState,
-  RestoreRecycleBinItemResponse,
 } from '../types';
 
 const initialRequest: RequestState = {
@@ -22,23 +14,15 @@ const initialRequest: RequestState = {
 export interface RecycleBinState {
   listing: GetRecycleBinResponse | null;
   item: GetRecycleBinItemResponse | null;
-  restoredItem: RestoreRecycleBinItemResponse | null;
   get: RequestState;
   getItem: RequestState;
-  restore: RequestState;
-  purge: RequestState;
-  empty: RequestState;
 }
 
 export const initialState: RecycleBinState = {
   listing: null,
   item: null,
-  restoredItem: null,
   get: initialRequest,
   getItem: initialRequest,
-  restore: initialRequest,
-  purge: initialRequest,
-  empty: initialRequest,
 };
 
 const pending = (): RequestState => ({
@@ -78,35 +62,6 @@ export default function recycleBin(
     case `${GET_RECYCLE_BIN_ITEM}_FAIL`:
       return { ...state, item: null, getItem: failure(action.error) };
 
-    case `${RESTORE_RECYCLE_BIN_ITEM}_PENDING`:
-      return { ...state, restoredItem: null, restore: pending() };
-    case `${RESTORE_RECYCLE_BIN_ITEM}_SUCCESS`:
-      return { ...state, restoredItem: action.result, restore: success() };
-    case `${RESTORE_RECYCLE_BIN_ITEM}_FAIL`:
-      return { ...state, restoredItem: null, restore: failure(action.error) };
-
-    case `${PURGE_RECYCLE_BIN_ITEM}_PENDING`:
-      return { ...state, purge: pending() };
-    case `${PURGE_RECYCLE_BIN_ITEM}_SUCCESS`:
-      return { ...state, purge: success() };
-    case `${PURGE_RECYCLE_BIN_ITEM}_FAIL`:
-      return { ...state, purge: failure(action.error) };
-
-    case `${EMPTY_RECYCLE_BIN}_PENDING`:
-      return { ...state, empty: pending() };
-    case `${EMPTY_RECYCLE_BIN}_SUCCESS`:
-      return { ...state, empty: success() };
-    case `${EMPTY_RECYCLE_BIN}_FAIL`:
-      return { ...state, empty: failure(action.error) };
-
-    case RESET_RECYCLE_BIN_OPERATION:
-      return {
-        ...state,
-        restoredItem: null,
-        restore: initialRequest,
-        purge: initialRequest,
-        empty: initialRequest,
-      };
     default:
       return state;
   }

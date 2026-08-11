@@ -162,14 +162,12 @@ class TestRecycleBinGET(RecycleBinTestBase):
             "id",
             "title",
             "path",
-            "parent_path",
             "deletion_date",
             "recycle_id",
             "deleted_by",
             "language",
             "review_state",
             "has_children",
-            "actions",
         }
         self.assertEqual(expected_keys, set(item.keys()))
 
@@ -190,17 +188,6 @@ class TestRecycleBinGET(RecycleBinTestBase):
         item = self.api_session.get("/@recyclebin").json()["items"][0]
 
         self.assertEqual("/news/old-news", item["path"])
-        self.assertEqual("/news", item["parent_path"])
-
-    def test_get_listing_item_has_actions(self):
-        """Items in listing expose restore and purge action URLs."""
-        recycle_id, _title = self._add_document_to_recyclebin()
-        response = self.api_session.get("/@recyclebin")
-        item = response.json()["items"][0]
-        self.assertIn("restore", item["actions"])
-        self.assertIn("purge", item["actions"])
-        self.assertIn(recycle_id, item["actions"]["restore"])
-        self.assertIn(recycle_id, item["actions"]["purge"])
 
     def test_get_listing_folder_has_children_flag(self):
         """Folder with children has has_children=True in listing."""
@@ -358,7 +345,6 @@ class TestRecycleBinGET(RecycleBinTestBase):
             "title",
             "@type",
             "path",
-            "parent_path",
             "deletion_date",
             "recycle_id",
             "deleted_by",
@@ -367,7 +353,6 @@ class TestRecycleBinGET(RecycleBinTestBase):
             "has_children",
             "items_total",
             "items",
-            "actions",
         }
         self.assertEqual(expected_keys, set(data.keys()))
 
@@ -394,7 +379,6 @@ class TestRecycleBinGET(RecycleBinTestBase):
         data = self.api_session.get(f"/@recyclebin/{recycle_id}").json()
 
         self.assertEqual("/test-folder", data["path"])
-        self.assertEqual("/", data["parent_path"])
         self.assertEqual("/test-folder/child-doc", data["items"][0]["path"])
 
     def test_get_individual_item_children_structure(self):

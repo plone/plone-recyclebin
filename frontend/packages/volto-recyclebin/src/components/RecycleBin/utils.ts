@@ -117,6 +117,30 @@ export function getFilterOptions(
   ).sort();
 }
 
+export function getBatching(
+  total: number,
+  bStart?: string | null,
+  bSize?: string | null,
+) {
+  const requestedPageSize = Number(bSize ?? 25);
+  const pageSize =
+    Number.isFinite(requestedPageSize) && requestedPageSize > 0
+      ? requestedPageSize
+      : 25;
+  const requestedOffset = Number(bStart ?? 0);
+  const offset =
+    Number.isFinite(requestedOffset) && requestedOffset >= 0
+      ? requestedOffset
+      : 0;
+
+  return {
+    pageSize,
+    offset,
+    currentPage: Math.floor(offset / pageSize),
+    totalPages: Math.ceil(total / pageSize),
+  };
+}
+
 export function getErrorMessage(error: any) {
   return (
     error?.response?.body?.message ||
@@ -129,9 +153,7 @@ export function getErrorMessage(error: any) {
 
 export async function performRecycleBinItems(
   ids: string[],
-  action: 'restore' | 'purge',
-  restore: (id: string) => Promise<any>,
-  purge: (id: string) => Promise<any>,
+  perform: (id: string) => Promise<any>,
 ) {
   const failures: Array<{ id: string; message: string }> = [];
   let succeeded = 0;
@@ -139,7 +161,7 @@ export async function performRecycleBinItems(
 
   for (const id of ids) {
     try {
-      const result = await (action === 'restore' ? restore(id) : purge(id));
+      const result = await perform(id);
       succeeded += 1;
       restoredUrl = result?.restored_item?.['@id'] ?? restoredUrl;
     } catch (error) {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   getErrorMessage,
+  getBatching,
   getFilterOptions,
   getQueryState,
   listingUrl,
@@ -43,6 +44,15 @@ describe('recycle bin query helpers', () => {
 });
 
 describe('recycle bin display helpers', () => {
+  it('derives Volto pagination values from batching parameters', () => {
+    expect(getBatching(52, '25', '25')).toEqual({
+      pageSize: 25,
+      offset: 25,
+      currentPage: 1,
+      totalPages: 3,
+    });
+  });
+
   it('extracts unique sorted filter values', () => {
     const items = [
       { '@type': 'News Item', deleted_by: 'bob' },
@@ -63,7 +73,6 @@ describe('recycle bin display helpers', () => {
   it('handles raw Volto API responses and rejected item operations', async () => {
     const result = await performRecycleBinItems(
       ['restored', 'failed'],
-      'restore',
       async (id) => {
         if (id === 'failed') {
           throw Object.assign(new Error('Restore failed'), {
@@ -72,7 +81,6 @@ describe('recycle bin display helpers', () => {
         }
         return { restored_item: { '@id': '/restored-document' } };
       },
-      async () => undefined,
     );
 
     expect(result).toEqual({

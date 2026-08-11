@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Button, Header, Table } from 'semantic-ui-react';
 import type { RecycleBinChildItem } from '../../types';
+import VoltoPagination from './VoltoPagination';
 import messages from './messages';
+import { getBatching } from './utils';
 
 export default function RecycleBinChildrenTable({
   items,
@@ -16,9 +19,24 @@ export default function RecycleBinChildrenTable({
   onRestore: (restoreId: string, targetPath: string) => void;
 }) {
   const intl = useIntl();
+  const history = useHistory();
+  const location = useLocation();
   const [targetPaths, setTargetPaths] = useState<Record<string, string>>({});
+  const params = new URLSearchParams(location.search);
+  const { pageSize, currentPage, totalPages } = getBatching(
+    itemsTotal,
+    params.get('b_start'),
+    params.get('b_size'),
+  );
 
-  if (!items.length) return null;
+  if (!itemsTotal) return null;
+
+  const changePage = (page: number) => {
+    const nextParams = new URLSearchParams(location.search);
+    nextParams.set('b_start', String(page * pageSize));
+    nextParams.set('b_size', String(pageSize));
+    history.push(`${location.pathname}?${nextParams.toString()}`);
+  };
 
   return (
     <section className="recycle-bin-children">
@@ -97,6 +115,17 @@ export default function RecycleBinChildrenTable({
           </Table.Body>
         </Table>
       </div>
+      {totalPages > 1 ? (
+        <div className="recycle-bin-pagination">
+          <VoltoPagination
+            current={currentPage}
+            total={totalPages}
+            onChangePage={(_event: unknown, { value }: { value: number }) =>
+              changePage(value)
+            }
+          />
+        </div>
+      ) : null}
     </section>
   );
 }

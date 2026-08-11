@@ -1,22 +1,15 @@
-export interface RecycleBinActionLinks {
-  restore: string;
-  purge: string;
-}
-
 export interface RecycleBinItemSummary {
   '@id': string;
   '@type': string;
   id: string;
   title: string;
   path: string;
-  parent_path: string;
   deletion_date: string;
   recycle_id: string;
   deleted_by: string;
   language: string | null;
   review_state: string | null;
   has_children: boolean;
-  actions: RecycleBinActionLinks;
 }
 
 export interface RecycleBinChildItem {
@@ -46,17 +39,6 @@ export interface GetRecycleBinItemResponse extends RecycleBinItemSummary {
 export interface RestoreRecycleBinItemData {
   target_path?: string;
   restore_id?: string;
-}
-
-export interface RestoreRecycleBinItemResponse {
-  status: 'success';
-  message: string;
-  restored_item: {
-    '@id': string;
-    id: string;
-    title: string;
-    '@type': string;
-  };
 }
 
 export interface RecycleBinQuery {

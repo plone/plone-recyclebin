@@ -1,21 +1,15 @@
-import { useState, type ComponentType } from 'react';
+import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Link, useHistory } from 'react-router-dom';
 import { Header, Message, Segment } from 'semantic-ui-react';
-import Pagination from '@plone/volto/components/theme/Pagination/Pagination';
 import type { GetRecycleBinResponse } from '../../types';
 import RecycleBinActions from './RecycleBinActions';
 import RecycleBinActiveFilters from './RecycleBinActiveFilters';
 import RecycleBinFilters from './RecycleBinFilters';
 import RecycleBinTable from './RecycleBinTable';
+import VoltoPagination from './VoltoPagination';
 import messages from './messages';
-import { listingUrl, type RecycleBinQueryState } from './utils';
-
-const VoltoPagination = Pagination as unknown as ComponentType<{
-  current: number;
-  total: number;
-  onChangePage: (event: unknown, data: { value: number }) => void;
-}>;
+import { getBatching, listingUrl, type RecycleBinQueryState } from './utils';
 
 export interface RecycleBinOperationMessage {
   text: string;
@@ -43,15 +37,11 @@ export default function RecycleBinListing({
   const intl = useIntl();
   const history = useHistory();
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const requestedPageSize = Number(queryState.b_size ?? 25);
-  const pageSize =
-    Number.isFinite(requestedPageSize) && requestedPageSize > 0
-      ? requestedPageSize
-      : 25;
-  const requestedOffset = Number(queryState.b_start ?? 0);
-  const offset = Number.isFinite(requestedOffset) ? requestedOffset : 0;
-  const currentPage = Math.floor(offset / pageSize);
-  const totalPages = Math.ceil(recycleBin.items_total / pageSize);
+  const { pageSize, offset, currentPage, totalPages } = getBatching(
+    recycleBin.items_total,
+    queryState.b_start,
+    queryState.b_size,
+  );
   const rangeStart = recycleBin.items_total === 0 ? 0 : offset + 1;
   const rangeEnd = Math.min(offset + pageSize, recycleBin.items_total);
   const hasFilters = Object.entries(queryState).some(

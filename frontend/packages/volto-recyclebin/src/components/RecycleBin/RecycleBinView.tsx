@@ -54,9 +54,12 @@ export default function RecycleBinView() {
     setOperationMessage(null);
     const { failures, succeeded, restoredUrl } = await performRecycleBinItems(
       ids,
-      action,
-      (id) => dispatch(restoreRecycleBinItem(id)),
-      (id) => dispatch(purgeRecycleBinItem(id)),
+      (id) =>
+        dispatch(
+          action === 'restore'
+            ? restoreRecycleBinItem(id)
+            : purgeRecycleBinItem(id),
+        ),
     );
 
     setRunning(false);

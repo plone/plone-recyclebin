@@ -4,7 +4,6 @@ import {
   getRecycleBin,
   getRecycleBinItem,
   purgeRecycleBinItem,
-  resetRecycleBinOperation,
   restoreRecycleBinItem,
 } from './recyclebin';
 import {
@@ -12,7 +11,6 @@ import {
   GET_RECYCLE_BIN,
   GET_RECYCLE_BIN_ITEM,
   PURGE_RECYCLE_BIN_ITEM,
-  RESET_RECYCLE_BIN_OPERATION,
   RESTORE_RECYCLE_BIN_ITEM,
 } from '../constants';
 
@@ -62,9 +60,6 @@ describe('recycle bin actions', () => {
     expect(emptyRecycleBin()).toEqual({
       type: EMPTY_RECYCLE_BIN,
       request: { op: 'del', path: '/@recyclebin' },
-    });
-    expect(resetRecycleBinOperation()).toEqual({
-      type: RESET_RECYCLE_BIN_OPERATION,
     });
   });
 });

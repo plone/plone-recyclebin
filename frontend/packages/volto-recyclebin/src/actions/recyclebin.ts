@@ -3,7 +3,6 @@ import {
   GET_RECYCLE_BIN,
   GET_RECYCLE_BIN_ITEM,
   PURGE_RECYCLE_BIN_ITEM,
-  RESET_RECYCLE_BIN_OPERATION,
   RESTORE_RECYCLE_BIN_ITEM,
 } from '../constants';
 import type { RecycleBinQuery, RestoreRecycleBinItemData } from '../types';
@@ -76,8 +75,4 @@ export function emptyRecycleBin() {
       path: '/@recyclebin',
     },
   };
-}
-
-export function resetRecycleBinOperation() {
-  return { type: RESET_RECYCLE_BIN_OPERATION };
 }
