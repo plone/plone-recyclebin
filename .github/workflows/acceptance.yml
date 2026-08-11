@@ -58,8 +58,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - uses: actions/cache@v4
+        name: Setup Cypress cache
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles(format('{0}/pnpm-lock.yaml', inputs.working-directory)) }}
+
       - name: Install dependencies
         run: make install
+
+      - name: Install Cypress binary
+        run: pnpm --filter @plone/volto exec cypress install
 
       - uses: JarvusInnovations/background-action@v1
         name: Start servers

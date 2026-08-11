@@ -169,8 +169,7 @@ class RecycleBinGet(Service):
         )
 
         serialized_items = [
-            self._serialize_item(item, item["recycle_id"])
-            for item in items
+            self._serialize_item(item, item["recycle_id"]) for item in items
         ]
 
         # Apply batching
