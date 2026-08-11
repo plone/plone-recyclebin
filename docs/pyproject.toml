@@ -10,7 +10,7 @@ keywords = [
 version="1.0.0"
 readme = "README.md"
 requires-python = ">=3.10,<3.14"
-license = { file = "LICENSE" }
+license = "GPL-2.0-only"
 maintainers = [
     { name = "Plone Community", email = "info@plone.org" },
 ]
@@ -53,8 +53,8 @@ dev = [
 ]
 
 [project.urls]
-Repository = "https://github.com/plone/plonerecyclebin"
-Documentation = "https://MY_READTHEDOCS_PROJECT_SLUG.readthedocs.io/"
+Repository = "https://github.com/plone/plone-recyclebin"
+Documentation = "https://plone.github.io/plone-recyclebin/"
 
 [build-system]
 requires = ["setuptools"]

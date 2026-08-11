@@ -4,152 +4,25 @@
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![CI](https://github.com/plone/plone-recyclebin/actions/workflows/main.yml/badge.svg)](https://github.com/plone/plone-recyclebin/actions/workflows/main.yml)
 
-A recycle bin for Plone
+A recycle bin for Plone that gives site managers a safe way to recover deleted
+content before it is permanently removed.
 
-The backend captures deleted content trees and exposes Classic UI views and a
-`@recyclebin` REST API. The Volto add-on provides a Redux-powered management UI
-at `/@@recyclebin`, including filtering, batching, bulk restore/purge, alternate
-restore destinations, and restoration of individual descendants. Recycling of
-new deletions is enabled by default; capture, retention, and workflow behavior
-are configured in **Site Setup → Recycle bin**.
+The [`plone.recyclebin` backend](./backend/README.md) preserves deleted content
+trees and provides Classic UI views and an `@recyclebin` REST API. The
+[`volto-recyclebin` frontend](./frontend/README.md) provides a management UI at
+`/@@recyclebin` with filtering, bulk actions, alternate restore destinations,
+and restoration of individual descendants. Recycling is enabled by default and
+can be configured in **Site Setup → Recycle bin**.
 
-## Quick Start 🏁
-
-### Prerequisites ✅
-
--   An [operating system](https://6.docs.plone.org/install/create-project-cookieplone.html#prerequisites-for-installation) that runs all the requirements mentioned.
--   [uv](https://6.docs.plone.org/install/create-project-cookieplone.html#uv)
--   [nvm](https://6.docs.plone.org/install/create-project-cookieplone.html#nvm)
--   [Node.js and pnpm](https://6.docs.plone.org/install/create-project.html#node-js) 24
--   [Make](https://6.docs.plone.org/install/create-project-cookieplone.html#make)
--   [Git](https://6.docs.plone.org/install/create-project-cookieplone.html#git)
--   [Docker](https://docs.docker.com/get-started/get-docker/) (optional)
-
-
-### Installation 🔧
-
-1.  Clone this repository, then change your working directory.
-
-    ```shell
-    git clone git@github.com:plone/plone-recyclebin.git
-    cd plone-recyclebin
-    ```
-
-2.  Install this code base.
-
-    ```shell
-    make install
-    ```
-
-
-### Fire Up the Servers 🔥
-
-1.  Create a new Plone site on your first run.
-
-    ```shell
-    make backend-create-site
-    ```
-
-2.  Start the backend at http://localhost:8080/.
-
-    ```shell
-    make backend-start
-    ```
-
-3.  In a new shell session, start the frontend at http://localhost:3000/.
-
-    ```shell
-    make frontend-start
-    ```
-
-Voila! Your Plone site should be live and kicking! 🎉
-
-### Local Stack Deployment 📦
-
-Deploy a local Docker Compose environment that includes the following.
-
-- Docker images for Backend and Frontend 🖼️
-- A stack with a Traefik router and a PostgreSQL database 🗃️
-- Accessible at [http://plone-recyclebin.localhost](http://plone-recyclebin.localhost) 🌐
-
-Run the following commands in a shell session.
-
-```shell
-make stack-create-site
-make stack-start
-```
-
-And... you're all set! Your Plone site is up and running locally! 🚀
-
-## Project structure 🏗️
-
-This monorepo consists of the following distinct sections:
-
-- **backend**: Houses the API and Plone installation, utilizing pip instead of buildout, and includes a policy package named plone.recyclebin.
-- **frontend**: Contains the React (Volto) package.
-- **devops**: Encompasses Docker stack, Ansible playbooks, and cache settings.
-- **docs**: Scaffold for writing documentation for your project.
-
-### Why this structure? 🤔
-
-- All necessary codebases to run the site are contained within the repository (excluding existing add-ons for Plone and React).
-- Specific GitHub Workflows are triggered based on changes in each codebase (refer to .github/workflows).
-- Simplifies the creation of Docker images for each codebase.
-- Demonstrates Plone installation/setup without buildout.
-
-## Code quality assurance 🧐
-
-To check your code against quality standards, run the following shell command.
-
-```shell
-make check
-```
-
-### Format the codebase
-
-To format and rewrite the code base, ensuring it adheres to quality standards, run the following shell command.
-
-```shell
-make format
-```
-
-| Section | Tool | Description | Configuration |
-| --- | --- | --- | --- |
-| backend | Ruff | Python code formatting, imports sorting  | [`backend/pyproject.toml`](./backend/pyproject.toml) |
-| backend | `zpretty` | XML and ZCML formatting  | -- |
-| frontend | ESLint | Fixes most common frontend issues | [`frontend/.eslintrc.js`](.frontend/.eslintrc.js) |
-| frontend | prettier | Format JS and Typescript code  | [`frontend/.prettierrc`](.frontend/.prettierrc) |
-| frontend | Stylelint | Format Styles (css, less, sass)  | [`frontend/.stylelintrc`](.frontend/.stylelintrc) |
-
-Formatters can also be run within the `backend` or `frontend` folders.
-
-### Linting the codebase
-or `lint`:
-
- ```shell
-make lint
-```
-
-| Section | Tool | Description | Configuration |
-| --- | --- | --- | --- |
-| backend | Ruff | Checks code formatting, imports sorting  | [`backend/pyproject.toml`](./backend/pyproject.toml) |
-| backend | Pyroma | Checks Python package metadata  | -- |
-| backend | check-python-versions | Checks Python version information  | -- |
-| backend | `zpretty` | Checks XML and ZCML formatting  | -- |
-| frontend | ESLint | Checks JS / Typescript lint | [`frontend/.eslintrc.js`](.frontend/.eslintrc.js) |
-| frontend | prettier | Check JS / Typescript formatting  | [`frontend/.prettierrc`](.frontend/.prettierrc) |
-| frontend | Stylelint | Check Styles (css, less, sass) formatting  | [`frontend/.stylelintrc`](.frontend/.stylelintrc) |
-
-Linters can be run individually within the `backend` or `frontend` folders.
-
-## Internationalization 🌐
-
-Generate translation files for Plone and Volto with ease:
-
-```shell
-make i18n
-```
+Read the [Plone Recycle Bin documentation](https://plone.github.io/plone-recyclebin/)
+for installation, usage, configuration, architecture, and REST API details.
 
 ## Credits and acknowledgements 🙏
 
-Generated using [Cookieplone (2.0.0b3)](https://github.com/plone/cookieplone) and [cookieplone-templates (c281198)](https://github.com/plone/cookieplone-templates/commit/c28119899af4373696232a54210fac17fcf79dc7) on 2026-08-04 14:01:41.750538. A special thanks to all contributors and supporters!
+The Plone recycle bin was originally implemented in branches of Plone core by Rohan Shaw, with the intent of becoming a core Plone feature via (PLIP 2966)[https://github.com/plone/Products.CMFPlone/issues/2966].
+David Glick and Andrea Cecchi reviewed and made improvements.
+
+The community gave feedback that it would be preferable to have the recycle bin as an add-on, so that we can gain confidence in the implementation and so that it is available in older versions of Plone.
+David Glick converted the implementation to an add-on and added the Volto frontend with assistance from Codex.
+
+Add-on boilerplate generated using [Cookieplone (2.0.0b3)](https://github.com/plone/cookieplone) and [cookieplone-templates (c281198)](https://github.com/plone/cookieplone-templates/commit/c28119899af4373696232a54210fac17fcf79dc7) on 2026-08-04 14:01:41.750538. A special thanks to all contributors and supporters!

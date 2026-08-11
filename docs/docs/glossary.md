@@ -1,57 +1,49 @@
 ---
 myst:
   html_meta:
-    "description": "Terms and definitions used throughout the Plone Sphinx Theme documentation."
-    "property=og:description": "Terms and definitions used throughout the Plone Sphinx Theme documentation."
-    "property=og:title": "Glossary"
-    "keywords": "Plone, documentation, glossary, term, definition"
+    "description": "Terms used in the Plone Recycle Bin documentation."
+    "property=og:description": "Terms used in the Plone Recycle Bin documentation."
+    "property=og:title": "Plone Recycle Bin glossary"
+    "keywords": "Plone, recycle bin, glossary, restore, purge"
 ---
-
-This glossary provides example terms and definitions relevant to **Plone Recycle Bin**.
-A recycle bin for Plone
-
-```{note}
-This is an example glossary demonstrating MyST Markdown’s `{glossary}` directive. You can adapt it for your project’s appendix by editing or replacing these entries with your own terms and definitions.
-```
 
 (glossary-label)=
 
-# Glossary
+# Glossary 📘
 
 ```{glossary}
 :sorted: true
 
 Plone
-    [Plone](https://plone.org/) is an open-source content management system that is used to create, edit, and manage digital content, like websites, intranets and custom solutions.
-    It comes with over 20 years of growth, optimisations, and refinements.
-    The result is a system trusted by governments, universities, businesses, and other organisations all over the world.
+    The open-source content management system extended by this add-on.
 
 add-on
-    An add-on in Plone extends its functionality.
-    It is code that is released as a package to make it easier to install.
+    A package that extends Plone or Volto. Plone Recycle Bin consists of the
+    `plone.recyclebin` Python package and the `volto-recyclebin` JavaScript
+    package.
 
-    In Volto, an add-on is a JavaScript package.
+portal-relative path
+    A path resolved from the Plone site root, such as `news/archive`. Restore
+    operations accept this form for an alternate destination.
 
-    In Plone core, an add-on is a Python package.
+purge
+    Permanently remove an entry from the recycle bin. The add-on cannot undo a
+    purge.
 
-    -   [Plone core add-ons](https://github.com/collective/awesome-plone#readme)
-    -   [Volto add-ons](https://github.com/collective/awesome-volto#readme)
-    -   [Add-ons tagged with the trove classifier `Framework :: Plone` on PyPI](https://pypi.org/search/?c=Framework+%3A%3A+Plone)
+recycle ID
+    A UUID assigned to a top-level deleted content tree. REST endpoints use it
+    to identify the recycle-bin entry independently of the content item's ID.
 
-Plone Sphinx Theme
-plone-sphinx-theme
-    [Plone Sphinx Theme](https://plone-sphinx-theme.readthedocs.io/) is a Sphinx theme for [Plone 6 Documentation](https://6.docs.plone.org/), [Plone Conference Training](https://training.plone.org/), and documentation of various Plone packages.
-    This scaffold uses Plone Sphinx Theme.
+restore ID
+    A UUID assigned to a descendant of a deleted content tree. It lets the REST
+    API restore one descendant without restoring the top-level entry.
 
-Markedly Structured Text
-MyST
-    [Markedly Structured Text (MyST)](https://myst-parser.readthedocs.io/en/latest/) is a rich and extensible flavor of Markdown, for authoring Plone Documentation.
-    The sample documentation in this scaffold is written in MyST.
+retention period
+    The number of days an entry is retained before it becomes eligible for
+    opportunistic expiration. A value of `0` disables automatic expiration.
 
-Sphinx
-    [Sphinx](https://www.sphinx-doc.org/en/master/) is a tool that makes it easy to create intelligent and beautiful documentation.
-    It was originally created for Python documentation, and it has excellent facilities for the documentation of software projects in a range of languages.
-    It can generate multiple output formats, including HTML and PDF, from a single source.
-    This scaffold uses Sphinx to generate documentation in HTML format.
+ZODB
+    The object database used by Plone. The add-on stores detached persistent
+    content objects in the same site's ZODB.
 
 ```
