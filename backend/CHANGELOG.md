@@ -8,3 +8,10 @@
 -->
 
 <!-- towncrier release notes start -->
+
+## 1.0.0a1 (2026-09-22)
+
+
+### New features:
+
+- Initial implementation. @rohnsha0, @davisagli

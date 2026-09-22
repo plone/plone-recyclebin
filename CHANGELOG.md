@@ -7,3 +7,31 @@
 -->
 
 <!-- towncrier release notes start -->
+## 1.0.0a1 (2026-09-22)
+
+### Backend
+
+
+#### New features:
+
+- Initial implementation. @rohnsha0, @davisagli 
+
+
+
+### Frontend
+
+#### Feature
+
+- Initial implementation. @davisagli 
+
+
+
+### Project
+
+
+#### Feature
+
+- Initial implementation. @rohnsha0, @davisagli 
+
+
+
