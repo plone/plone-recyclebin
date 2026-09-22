@@ -1,5 +1,5 @@
-const addons = ["volto-recyclebin"];
-const theme = "";
+const addons = ['@plone/volto-recyclebin'];
+const theme = '';
 
 module.exports = {
   addons,

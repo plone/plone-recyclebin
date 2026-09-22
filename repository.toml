@@ -20,7 +20,7 @@ base_package = "Products.CMFPlone"
 publish = true
 
 [frontend.package]
-name = "volto-recyclebin"
+name = "@plone/volto-recyclebin"
 path = "frontend/packages/volto-recyclebin"
 code_path = "src"
 changelog = "frontend/packages/volto-recyclebin/CHANGELOG.md"

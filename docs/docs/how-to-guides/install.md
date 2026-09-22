@@ -13,7 +13,7 @@ Plone Recycle Bin has two packages:
 
 -   `plone.recyclebin` provides storage, Classic UI, configuration, and the
     optional REST API.
--   `volto-recyclebin` provides the Volto management interface and requires
+-   `@plone/volto-recyclebin` provides the Volto management interface and requires
     Volto 19 or later.
 
 Install both packages for a Volto site. Install only the backend package for a
@@ -44,17 +44,17 @@ For an automated deployment, apply the GenericSetup profile
 
 ## Install the Volto add-on ⚛️
 
-1.  Add `volto-recyclebin` to the `dependencies` object in the
+1.  Add `@plone/volto-recyclebin` to the `dependencies` object in the
     `package.json` of your frontend **policy package**, which is under the
     project's `packages` directory.
 
-2.  Add `volto-recyclebin` to that same policy package's `addons` array.
+2.  Add `@plone/volto-recyclebin` to that same policy package's `addons` array.
 
     ```json
     {
-      "addons": ["volto-recyclebin"],
+      "addons": ["@plone/volto-recyclebin"],
       "dependencies": {
-        "volto-recyclebin": "^1.0.0-alpha.0"
+        "@plone/volto-recyclebin": "^1.0.0-alpha.0"
       }
     }
     ```

@@ -1,10 +1,10 @@
-# volto-recyclebin
+# @plone/volto-recyclebin
 
-`volto-recyclebin` is the Volto management interface for
+`@plone/volto-recyclebin` is the Volto management interface for
 [Plone Recycle Bin](https://github.com/plone/plone-recyclebin). It gives site
 managers a safe way to inspect, restore, and permanently remove deleted content.
 
-[![npm](https://img.shields.io/npm/v/volto-recyclebin)](https://www.npmjs.com/package/volto-recyclebin)
+[![npm](https://img.shields.io/npm/v/@plone/volto-recyclebin)](https://www.npmjs.com/package/@plone/volto-recyclebin)
 [![CI](https://github.com/plone/plone-recyclebin/actions/workflows/main.yml/badge.svg)](https://github.com/plone/plone-recyclebin/actions/workflows/main.yml)
 
 ## Features
@@ -22,14 +22,14 @@ managers a safe way to inspect, restore, and permanently remove deleted content.
 
 ## Installation
 
-Add `volto-recyclebin` to the `addons` and `dependencies` of your frontend
+Add `@plone/volto-recyclebin` to the `addons` and `dependencies` of your frontend
 policy package:
 
 ```json
 {
-  "addons": ["volto-recyclebin"],
+  "addons": ["@plone/volto-recyclebin"],
   "dependencies": {
-    "volto-recyclebin": "^1.0.0-alpha.0"
+    "@plone/volto-recyclebin": "^1.0.0-alpha.0"
   }
 }
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "volto-recyclebin",
+  "name": "@plone/volto-recyclebin",
   "version": "1.0.0-alpha.0",
   "description": "A recycle bin for Plone",
   "main": "src/index.ts",

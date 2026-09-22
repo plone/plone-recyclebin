@@ -19,7 +19,7 @@ Plone
 
 add-on
     A package that extends Plone or Volto. Plone Recycle Bin consists of the
-    `plone.recyclebin` Python package and the `volto-recyclebin` JavaScript
+    `plone.recyclebin` Python package and the `@plone/volto-recyclebin` JavaScript
     package.
 
 portal-relative path

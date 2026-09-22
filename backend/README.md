@@ -27,7 +27,7 @@ entries.
 - Plone 6.1 or 6.2
 
 The REST API is registered when `plone.restapi` is available. It is required
-when using the `volto-recyclebin` frontend.
+when using the `@plone/volto-recyclebin` frontend.
 
 ## Installation
 

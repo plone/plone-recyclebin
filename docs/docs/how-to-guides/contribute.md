@@ -18,7 +18,7 @@ The monorepo contains these sections:
 
 -   `backend` contains the `plone.recyclebin` Python package, Classic UI, REST
     API, and backend tests.
--   `frontend` contains the `volto-recyclebin` Volto add-on and Cypress tests.
+-   `frontend` contains the `@plone/volto-recyclebin` Volto add-on and Cypress tests.
 -   `docs` contains the Sphinx source published to GitHub Pages.
 
 Keeping the packages together provides a complete development environment,

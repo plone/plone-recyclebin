@@ -9,7 +9,7 @@ content before it is permanently removed.
 
 The [`plone.recyclebin` backend](./backend/README.md) preserves deleted content
 trees and provides Classic UI views and an `@recyclebin` REST API. The
-[`volto-recyclebin` frontend](./frontend/README.md) provides a management UI at
+[`@plone/volto-recyclebin` frontend](./frontend/README.md) provides a management UI at
 `/@@recyclebin` with filtering, bulk actions, alternate restore destinations,
 and restoration of individual descendants. Recycling is enabled by default and
 can be configured in **Site Setup → Recycle bin**.

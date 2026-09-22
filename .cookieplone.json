@@ -8,7 +8,7 @@
     "plone_version": "6.2.1",
     "volto_version": "19.3.0",
     "python_package_name": "plone.recyclebin",
-    "npm_package_name": "volto-recyclebin",
+    "npm_package_name": "@plone/volto-recyclebin",
     "github_organization": "plone",
     "container_registry": "github",
     "initialize_documentation": true,
