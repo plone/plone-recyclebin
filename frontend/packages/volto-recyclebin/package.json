@@ -30,7 +30,6 @@
   },
   "addons": [],
   "theme": "",
-  "dependencies": {},
   "peerDependencies": {
     "@plone/volto": ">=19.0.0",
     "react": "^18.2.0",
@@ -44,12 +43,12 @@
     "@plone/registry": "workspace:*",
     "@plone/scripts": "workspace:*",
     "@plone/types": "workspace:*",
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
     "@types/react-router-dom": "^5.3.3",
-    "typescript": "^5.7.3",
-    "@testing-library/react": "^16.2.0",
-    "release-it": "^19.0.5",
-    "vitest": "^3.1.2"
+    "release-it": "^19.2.4",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7"
   }
 }
