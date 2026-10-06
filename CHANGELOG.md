@@ -7,6 +7,30 @@
 -->
 
 <!-- towncrier release notes start -->
+## 1.0.0a2 (2026-10-06)
+
+### Backend
+
+No significant changes.
+
+
+
+
+### Frontend
+
+#### Bugfix
+
+- Added German translations. @TimoBroeskamp @kittauri [#4](https://github.com/plone/plone-recyclebin/issue/4)
+
+
+
+### Project
+
+No significant changes.
+
+
+
+
 ## 1.0.0a1 (2026-09-22)
 
 ### Backend
