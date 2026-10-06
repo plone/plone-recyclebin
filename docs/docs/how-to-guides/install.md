@@ -54,7 +54,7 @@ For an automated deployment, apply the GenericSetup profile
     {
       "addons": ["@plone/volto-recyclebin"],
       "dependencies": {
-        "@plone/volto-recyclebin": "^1.0.0-alpha.1"
+        "@plone/volto-recyclebin": "^1.0.0-alpha.2"
       }
     }
     ```
