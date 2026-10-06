@@ -14,289 +14,289 @@ msgstr ""
 #. Default: "Select all deleted items"
 #: components/RecycleBin/messages
 msgid "recyclebin.action.select_all"
-msgstr ""
+msgstr "Alle gelöschten Elemente auswählen"
 
 #. Default: "Select {title}"
 #: components/RecycleBin/messages
 msgid "recyclebin.action.select_item"
-msgstr ""
+msgstr "{title} auswählen"
 
 #. Default: "Apply filters"
 #: components/RecycleBin/messages
 msgid "recyclebin.button.apply_filters"
-msgstr ""
+msgstr "Filter anwenden"
 
 #. Default: "Clear all filters"
 #: components/RecycleBin/messages
 msgid "recyclebin.button.clear_filters"
-msgstr ""
+msgstr "Alle Filter zurücksetzen"
 
 #. Default: "Delete selected"
 #: components/RecycleBin/messages
 msgid "recyclebin.button.delete_selected"
-msgstr ""
+msgstr "Ausgewählte löschen"
 
 #. Default: "Empty recycle bin"
 #: components/RecycleBin/messages
 msgid "recyclebin.button.empty"
-msgstr ""
+msgstr "Papierkorb leeren"
 
 #. Default: "Permanently delete"
 #: components/RecycleBin/messages
 msgid "recyclebin.button.permanently_delete"
-msgstr ""
+msgstr "Permanent löschen"
 
 #. Default: "Restore"
 #: components/RecycleBin/messages
 msgid "recyclebin.button.restore"
-msgstr ""
+msgstr "Wiederherstellen"
 
 #. Default: "Restore selected"
 #: components/RecycleBin/messages
 msgid "recyclebin.button.restore_selected"
-msgstr ""
+msgstr "Ausgewählte wiederherstellen"
 
 #. Default: "Permanently delete this item? This cannot be undone."
 #: components/RecycleBin/messages
 msgid "recyclebin.confirm.delete_item"
-msgstr ""
+msgstr "Dieses Element endgültig löschen? Dies kann nicht rückgängig gemacht werden."
 
 #. Default: "Permanently delete the selected items? This cannot be undone."
 #: components/RecycleBin/messages
 msgid "recyclebin.confirm.delete_selected"
-msgstr ""
+msgstr "Die ausgewählten Elemente endgültig löschen? Dies kann nicht rückgängig gemacht werden."
 
 #. Default: "Permanently delete every item in the recycle bin? This cannot be undone."
 #: components/RecycleBin/messages
 msgid "recyclebin.confirm.empty"
-msgstr ""
+msgstr "Alle Elemente im Papierkorb endgültig löschen? Dies kann nicht rückgängig gemacht werden."
 
 #. Default: "Items deleted from this site are stored here and can be restored or permanently deleted."
 #: components/RecycleBin/messages
 msgid "recyclebin.description"
-msgstr ""
+msgstr "Von dieser Website gelöschte Elemente werden hier gespeichert und können wiederhergestellt oder endgültig gelöscht werden."
 
 #. Default: "This item may already have been restored or permanently deleted."
 #: components/RecycleBin/messages
 msgid "recyclebin.error.not_found.description"
-msgstr ""
+msgstr "Dieses Element wurde möglicherweise bereits wiederhergestellt oder endgültig gelöscht."
 
 #. Default: "Item not found"
 #: components/RecycleBin/messages
 msgid "recyclebin.error.not_found.title"
-msgstr ""
+msgstr "Element nicht gefunden"
 
 #. Default: "The recycle bin is unavailable, or you do not have permission to access it."
 #: components/RecycleBin/messages
 msgid "recyclebin.error.unavailable.description"
-msgstr ""
+msgstr "Der Papierkorb ist nicht verfügbar oder du hast keine Berechtigung, darauf zuzugreifen."
 
 #. Default: "Recycle bin unavailable"
 #: components/RecycleBin/messages
 msgid "recyclebin.error.unavailable.title"
-msgstr ""
+msgstr "Papierkorb nicht verfügbar"
 
 #. Default: "Target path for {title}"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.child_target_path"
-msgstr ""
+msgstr "Zielpfad für {title}"
 
 #. Default: "Nested items"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.children_count"
-msgstr ""
+msgstr "Verschachtelte Elemente"
 
 #. Default: "Contains items"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.contains_items"
-msgstr ""
+msgstr "Enthält Elemente"
 
 #. Default: "Deleted from"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.date_from"
-msgstr ""
+msgstr "Gelöscht ab"
 
 #. Default: "Deleted to"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.date_to"
-msgstr ""
+msgstr "Gelöscht bis"
 
 #. Default: "Deleted by"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.deleted_by"
-msgstr ""
+msgstr "Gelöscht von"
 
 #. Default: "Deletion date"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.deletion_date"
-msgstr ""
+msgstr "Löschdatum"
 
 #. Default: "Language"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.language"
-msgstr ""
+msgstr "Sprache"
 
 #. Default: "Items per page"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.page_size"
-msgstr ""
+msgstr "Elemente pro Seite"
 
 #. Default: "Original path"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.path"
-msgstr ""
+msgstr "Ursprünglicher Pfad"
 
 #. Default: "Search"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.search"
-msgstr ""
+msgstr "Suchen"
 
 #. Default: "Sort by"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.sort"
-msgstr ""
+msgstr "Sortieren nach"
 
 #. Default: "Target path"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.target_path"
-msgstr ""
+msgstr "Zielpfad"
 
 #. Default: "Title"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.title"
-msgstr ""
+msgstr "Titel"
 
 #. Default: "Type"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.type"
-msgstr ""
+msgstr "Typ"
 
 #. Default: "Workflow state"
 #: components/RecycleBin/messages
 msgid "recyclebin.field.workflow_state"
-msgstr ""
+msgstr "Workflow-Status"
 
 #. Default: "Advanced filters"
 #: components/RecycleBin/messages
 msgid "recyclebin.filter.advanced"
-msgstr ""
+msgstr "Erweiterte Filter"
 
 #. Default: "Any"
 #: components/RecycleBin/messages
 msgid "recyclebin.filter.any"
-msgstr ""
+msgstr "Beliebig"
 
 #. Default: "With contained items"
 #: components/RecycleBin/messages
 msgid "recyclebin.filter.with_subitems"
-msgstr ""
+msgstr "Mit enthaltenen Elementen"
 
 #. Default: "Without contained items"
 #: components/RecycleBin/messages
 msgid "recyclebin.filter.without_subitems"
-msgstr ""
+msgstr "Ohne enthaltene Elemente"
 
 #. Default: "Contained items ({count})"
 #: components/RecycleBin/messages
 msgid "recyclebin.heading.children"
-msgstr ""
+msgstr "Enthaltene Elemente ({count})"
 
 #. Default: "Deleted item details"
 #: components/RecycleBin/messages
 msgid "recyclebin.heading.details"
-msgstr ""
+msgstr "Details zum gelöschten Element"
 
 #. Default: "Restore to"
 #: components/RecycleBin/messages
 msgid "recyclebin.heading.restore_to"
-msgstr ""
+msgstr "Wiederherstellen unter"
 
 #. Default: "Leave unchanged to restore to the original parent, or enter another portal-relative path."
 #: components/RecycleBin/messages
 msgid "recyclebin.help.target_path"
-msgstr ""
+msgstr "Leer lassen für Ursprungspfad, oder anderen portal-relativen Pfad eingeben."
 
 #. Default: "Contains items"
 #: components/RecycleBin/messages
 msgid "recyclebin.label.has_children"
-msgstr ""
+msgstr "Enthält Elemente"
 
 #. Default: "Back to recycle bin"
 #: components/RecycleBin/messages
 msgid "recyclebin.link.back"
-msgstr ""
+msgstr "Zurück zum Papierkorb"
 
 #. Default: "The recycle bin is empty."
 #: components/RecycleBin/messages
 msgid "recyclebin.message.empty"
-msgstr ""
+msgstr "Der Papierkorb ist leer."
 
 #. Default: "Loading recycle bin…"
 #: components/RecycleBin/messages
 msgid "recyclebin.message.loading"
-msgstr ""
+msgstr "Papierkorb wird geladen…"
 
 #. Default: "No items match the current filters."
 #: components/RecycleBin/messages
 msgid "recyclebin.message.no_matches"
-msgstr ""
+msgstr "Keine Elemente entsprechen den aktuellen Filtern."
 
 #. Default: "Operation completed successfully."
 #: components/RecycleBin/messages
 msgid "recyclebin.message.operation_succeeded"
-msgstr ""
+msgstr "Vorgang erfolgreich abgeschlossen."
 
 #. Default: "{succeeded} succeeded and {failed} failed."
 #: components/RecycleBin/messages
 msgid "recyclebin.message.partial_failure"
-msgstr ""
+msgstr "{succeeded} erfolgreich, {failed} fehlgeschlagen."
 
 #. Default: "Showing {start}–{end} of {total}"
 #: components/RecycleBin/messages
 msgid "recyclebin.message.result_range"
-msgstr ""
+msgstr "{start}-{end} von {total} werden angezeigt"
 
 #. Default: "Deletion date, oldest first"
 #: components/RecycleBin/messages
 msgid "recyclebin.sort.date_asc"
-msgstr ""
+msgstr "Löschdatum, ältestes zuerst"
 
 #. Default: "Deletion date, newest first"
 #: components/RecycleBin/messages
 msgid "recyclebin.sort.date_desc"
-msgstr ""
+msgstr "Löschdatum, neuestes zuerst"
 
 #. Default: "Title, A–Z"
 #: components/RecycleBin/messages
 msgid "recyclebin.sort.title_asc"
-msgstr ""
+msgstr "Titel, A–Z"
 
 #. Default: "Title, Z–A"
 #: components/RecycleBin/messages
 msgid "recyclebin.sort.title_desc"
-msgstr ""
+msgstr "Titel, Z–A"
 
 #. Default: "Type, A–Z"
 #: components/RecycleBin/messages
 msgid "recyclebin.sort.type_asc"
-msgstr ""
+msgstr "Typ, A–Z"
 
 #. Default: "Type, Z–A"
 #: components/RecycleBin/messages
 msgid "recyclebin.sort.type_desc"
-msgstr ""
+msgstr "Typ, Z–A"
 
 #. Default: "Workflow state, A–Z"
 #: components/RecycleBin/messages
 msgid "recyclebin.sort.workflow_asc"
-msgstr ""
+msgstr "Workflow-Status, A–Z"
 
 #. Default: "Workflow state, Z–A"
 #: components/RecycleBin/messages
 msgid "recyclebin.sort.workflow_desc"
-msgstr ""
+msgstr "Workflow-Status, Z–A"
 
 #. Default: "Recycle bin"
 #: components/RecycleBin/messages
 msgid "recyclebin.title"
-msgstr ""
+msgstr "Papierkorb"
